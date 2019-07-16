@@ -53,8 +53,8 @@ public class log {
         return name;
     }
 
-    public void appendLog(int[] x_value,int[] y_value,int[] z_value, int[] a_value) {
-
+    public void appendLog(int[] x,int[] y,int[] z, int[] a, int[] b) {
+        double flow1,flow2,flow3,flow4,batteryval;
         try {
             PrintWriter output = new PrintWriter(new FileWriter(logFile, true));
 
@@ -64,8 +64,13 @@ public class log {
 
 
             for(int i = 0; i < 2; i++){
+                flow1 = .0035*(x[i]);
+                flow2 = .0035*(y[i]);
+                flow3 = .0035*(z[i]);
+                flow4 = .0035*(a[i]);
+                batteryval = .0035*b[i];
 
-                output.printf("%10.3f\t%8.4f\t%8.4f\t%8.4f\t%8.4f\r\n",counter/1.0, x_value[i]/1.0, y_value[i]/1.0, z_value[i]/1.0, a_value[i]/1.0);
+                output.printf("%10.3f\t%8.4f\t%8.4f\t%8.4f\t%8.4f\t%8.4f\r\n",counter/1.0, flow1,flow2,flow3,flow4,batteryval);
                 counter++;
             }
 

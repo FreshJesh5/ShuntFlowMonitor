@@ -65,6 +65,8 @@ public class NFC_BLE_HYBRID_Activity extends BleProfileActivity implements NFC_B
 
 	List<String> UID_List = new ArrayList<>();
 	private String[] UID_Array = new String[4];
+	private double[] batteryarray = new double[50];
+	private int batcount = 0;
 
 	private log datalog = new log();
 
@@ -219,12 +221,12 @@ public class NFC_BLE_HYBRID_Activity extends BleProfileActivity implements NFC_B
 
 	void updateGraph(int[] x,int[] y, int[] z, int[] a) {
 
-		for(int i = 0; i < 3; i++) {
+		for(int i = 0; i < 2; i++) {
 			mCounter++;
-			mLineGraph.addValue_x(mCounter, x[i]);
-			mLineGraph.addValue_y(mCounter, y[i]);
-			mLineGraph.addValue_z(mCounter, z[i]);
-			mLineGraph.addValue_a(mCounter, a[i]);
+			mLineGraph.addValue_x(mCounter, .0035*x[i]);
+			mLineGraph.addValue_y(mCounter, .0035*y[i]);
+			mLineGraph.addValue_z(mCounter, .0035*z[i]);
+			mLineGraph.addValue_a(mCounter, .0035*a[i]);
 			if (mCounter > GRAPH_WINDOW) {
 				mLineGraph.removeold(0);
 
@@ -236,6 +238,31 @@ public class NFC_BLE_HYBRID_Activity extends BleProfileActivity implements NFC_B
 //			}
 		}
 	}
+    	//added updateBattery function. This function takes the b array filled with advertised
+    	//battery life data and adds it to the mybattery TextView, which will display it. The
+    	//function only updates the View every 50 cycles to save computing work, and the conversion
+    	//equation used to transform the value in the b array to a percent was found experimentally,
+    	//and may be slightly off
+    void updateBattery(int b) {
+	    double avg = 0;
+	    batteryarray[batcount] = b*.1948-367.89;
+	    batcount++;
+	    if(batcount == 50) {
+	        batcount = 0;
+	        for(int i=0;i<50;i++) {
+	            avg+=batteryarray[i];
+            }
+	        avg=avg/50;
+	        if(avg<0)
+	            avg=0;
+	        else if(avg>100)
+	            avg=100;
+	        TextView battery = (TextView) findViewById(R.id.mybattery);
+	        String percent = Double.toString(avg);
+	        percent.concat("%");
+	        battery.setText(percent);
+        }
+    }
 
 
 	void startShowGraph() {
@@ -316,9 +343,11 @@ public class NFC_BLE_HYBRID_Activity extends BleProfileActivity implements NFC_B
 	}
 
 	@Override
-	public void onHRValueReceived(int[] x,int[] y, int[] z, int[] a) {
+	public void onHRValueReceived(int[] x,int[] y, int[] z, int[] a,int[] b) {
 		updateGraph(x,y,z,a);
-		datalog.appendLog(x,y,z,a);
+		
+		datalog.appendLog(x,y,z,a,b);
+		updateBattery(b[0]);
 	}
 
 
