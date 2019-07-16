@@ -1,0 +1,22 @@
+ble_adc/pca10040/s132/armgcc/_build/*
+
+
+
+#For gcc-arm Make file
+*.d
+*.o
+*.map
+*.bin
+*.hex
+*.ewd
+*.ewp
+*.icf
+*.id
+*.in
+*.out
+.ld
+.eww
+
+
+#visual studio code
+.vscode/*
