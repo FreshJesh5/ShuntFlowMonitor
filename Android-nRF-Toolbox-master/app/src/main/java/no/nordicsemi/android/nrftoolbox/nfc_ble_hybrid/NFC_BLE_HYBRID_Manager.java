@@ -139,7 +139,7 @@ public class NFC_BLE_HYBRID_Manager extends BleManager<NFC_BLE_HYBRID_ManagerCal
 				Logger.a(mLogSession, HeartRateMeasurementParser.parse(characteristic));
 
 
-			for(int i = 0; i<3; i++){
+			for(int i = 0; i<2; i++){
 				x[i] = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT16, i*10);
 				y[i] = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT16, i*10+2);
 				z[i] = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT16, i*10+4);
