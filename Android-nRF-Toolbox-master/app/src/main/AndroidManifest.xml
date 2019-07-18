@@ -94,6 +94,9 @@
 				<category android:name="no.nordicsemi.android.nrftoolbox.LAUNCHER" />
 			</intent-filter>
 		</activity>
+		<activity
+			android:name="no.nordicsemi.android.nrftoolbox.dfu.settings.SettingsActivity"
+			android:label="@string/dfu_settings_title" />
 		-->
 
 		<activity
@@ -111,9 +114,7 @@
 		</activity>
 
 
-		<activity
-			android:name="no.nordicsemi.android.nrftoolbox.dfu.settings.SettingsActivity"
-			android:label="@string/dfu_settings_title" />
+
 		<activity
 			android:name="no.nordicsemi.android.nrftoolbox.dfu.NotificationActivity"
 			android:label="@string/dfu_feature_title" />
