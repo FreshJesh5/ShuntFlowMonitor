@@ -221,7 +221,7 @@ public class NFC_BLE_HYBRID_Activity extends BleProfileActivity implements NFC_B
 
 	void updateGraph(int[] x,int[] y, int[] z, int[] a) {
 
-		for(int i = 0; i < 3; i++) {
+		for(int i = 0; i < 2; i++) {
 			mCounter++;
 			mLineGraph.addValue_x(mCounter, .0035*x[i]);
 			mLineGraph.addValue_y(mCounter, .0035*y[i]);
@@ -260,7 +260,9 @@ public class NFC_BLE_HYBRID_Activity extends BleProfileActivity implements NFC_B
 				avg=100;
 			TextView battery = (TextView) findViewById(R.id.mybattery);
 			String percent = Double.toString(avg);
-			percent.concat("%");
+			int period = percent.indexOf(".");
+			percent = percent.substring(0,period);
+			percent+= "%";
 			battery.setText(percent);
 		}
 	}
