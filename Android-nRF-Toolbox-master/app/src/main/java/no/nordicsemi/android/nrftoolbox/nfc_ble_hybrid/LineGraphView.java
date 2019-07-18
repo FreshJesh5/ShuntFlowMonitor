@@ -39,16 +39,24 @@ import org.achartengine.renderer.XYSeriesRenderer;
 public class LineGraphView {
 	//TimeSeries will hold the data in x,y format for single chart
 //	private TimeSeries mSeries = new TimeSeries(" ");
-	private TimeSeries axisxSeries = new TimeSeries("x value");
-	private TimeSeries axisySeries = new TimeSeries("y value");
-	private TimeSeries axiszSeries = new TimeSeries("z value");
-	private TimeSeries axisaSeries = new TimeSeries("a value");
+	private TimeSeries axisxSeries = new TimeSeries("x");
+	private TimeSeries axisySeries = new TimeSeries("y");
+	private TimeSeries axiszSeries = new TimeSeries("z");
+	private TimeSeries axisaSeries = new TimeSeries("a");
 	//XYMultipleSeriesDataset will contain all the TimeSeries
 	private XYMultipleSeriesDataset mDataset = new XYMultipleSeriesDataset();
 	//XYMultipleSeriesRenderer will contain all XYSeriesRenderer and it can be used to set the properties of whole Graph
 	private XYMultipleSeriesRenderer mMultiRenderer = new XYMultipleSeriesRenderer();
 	private LineGraphView mInstance = null;
 
+	private double x_init;
+	public double getx_init(){return x_init;}
+	private double y_init;
+	public double gety_init(){return y_init;}
+	private double z_init;
+	public double getz_init(){return z_init;}
+	private double a_init;
+	public double geta_init(){return a_init;}
 	/**
 	 * singleton implementation of LineGraphView class
 	 */
@@ -82,7 +90,7 @@ public class LineGraphView {
 
 		final XYSeriesRenderer xdata = new XYSeriesRenderer();
 		//set line chart color to Black
-		xdata.setColor(0xFFFFFF00);
+		xdata.setColor(Color.rgb(0,200,200));
 		//set line chart style to square points
 		xdata.setPointStyle(PointStyle.CIRCLE);
 		xdata.setFillPoints(true);
@@ -113,37 +121,39 @@ public class LineGraphView {
 
 		final XYMultipleSeriesRenderer renderer = mMultiRenderer;
 		//set whole graph background color to transparent color
-		renderer.setBackgroundColor(Color.TRANSPARENT);
-		renderer.setMargins(new int[]{50, 105, 80, 5}); // top, left, bottom, right
-		renderer.setMarginsColor(Color.argb(0x00, 0x05, 0x05, 0x05));
+		//renderer.setBackgroundColor(Color.TRANSPARENT);
+		renderer.setMargins(new int[]{50, 120, 50, 10}); // top, left, bottom, right
+		//renderer.setMarginsColor(Color.argb(0x00, 0x05, 0x05, 0x05));
 		renderer.setAxesColor(0xFFFFFFFF);
-		renderer.setAxisTitleTextSize(5);
 		renderer.setShowGrid(true);
-		//renderer.setGridColor(Color.GREEN);
+
 		renderer.setLabelsColor(0xFFFFFFFF);
-		renderer.setYLabelsColor(0, 0xFFFFFFF);
-		renderer.setYLabelsAlign(Align.RIGHT);
+		//renderer.setYLabelsColor(0, 0xFFFFFFF);
+		renderer.setYLabelsAlign(Align.CENTER);
 		renderer.setYLabelsPadding(30);
-		renderer.setXLabelsColor(0xFFFFFFFF);
+		//renderer.setXLabelsColor(0xFFFFFFFF);
 		renderer.setLabelsTextSize(30);
-		renderer.setYAxisMax(5000);
+		renderer.setYAxisMax(10);
 		renderer.setYAxisMin(0);
 		renderer.setXAxisMax(NFC_BLE_HYBRID_Activity.GRAPH_WINDOW);
 		renderer.setXAxisMin(0);
 		renderer.setXLabels(8);
 		renderer.setYLabels(5);
+
 		renderer.setLegendTextSize(25);
-		renderer.setShowGrid(true);
-		renderer.setXTitle("  ");
-		renderer.setYTitle("                   ");
-		renderer.setXLabels(0);
+		renderer.setAxisTitleTextSize(50);
+		renderer.setShowAxes(true);
+		renderer.setXTitle("Sample");
+		renderer.setYTitle("Delta Temperature");
+		renderer.setShowLabels(true);
+		renderer.setShowGridY(false);
 		//renderer.setYLabels(0);
 		//renderer.setShowLabels(false);
 
 
 		//Disable zoom
-		renderer.setPanEnabled(false, false);
-		renderer.setZoomEnabled(false, false);
+		renderer.setPanEnabled(false, true);
+		renderer.setZoomEnabled(false, true);
 		//set title to x-axis and y-axis
 		//renderer.addSeriesRenderer(EMGData);
 
@@ -195,24 +205,37 @@ public class LineGraphView {
 
 
 
-	public void addValue_x(int x, int y) {
-
-		axisxSeries.add(x, y);
+	public void addValue_x(int x, double y) {
+		if (axisxSeries.getItemCount()==0) {
+			x_init = y;
+			axisxSeries.add(x, 0);
+		}
+		else axisxSeries.add(x, y-x_init);
 	}
 
-	public void addValue_y(int x, int y) {
-
-		axisySeries.add(x, y);
+	public void addValue_y(int x, double y) {
+		if (axisySeries.getItemCount()==0) {
+			y_init = y;
+			axisySeries.add(x, 0);
+		}
+		else axisySeries.add(x, y-y_init);
 	}
 
-	public void addValue_z(int x, int y) {
-		axiszSeries.add(x, y);
+	public void addValue_z(int x, double y) {
+		if (axiszSeries.getItemCount()==0) {
+			z_init = y;
+			axiszSeries.add(x, 0);
+		}
+		else axiszSeries.add(x, y-z_init);
 	}
 
-	public void addValue_a(int x, int y) {
-		axisaSeries.add(x, y);
+	public void addValue_a(int x, double y) {
+		if (axisaSeries.getItemCount()==0) {
+			a_init = y;
+			axisaSeries.add(x, 0);
+		}
+		else axisaSeries.add(x, y-a_init);
 	}
-
 	/**
 	 * clear all previous values of chart
 	 */

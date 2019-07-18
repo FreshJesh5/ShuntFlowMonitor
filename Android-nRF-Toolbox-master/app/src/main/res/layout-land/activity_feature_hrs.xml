@@ -28,13 +28,13 @@
 
     <include layout="@layout/toolbar"
         android:id="@+id/toolbar_actionbar"/>
-
+<!--
     <no.nordicsemi.android.nrftoolbox.widget.ForegroundRelativeLayout
         style="@style/HeaderShadow"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     
-        <!-- The size of text below must be fixed, therefore dp are used instead of sp -->
+         The size of text below must be fixed, therefore dp are used instead of sp
 
         <no.nordicsemi.android.nrftoolbox.widget.TrebuchetBoldTextView
             android:layout_width="wrap_content"
@@ -85,7 +85,7 @@
             android:layout_marginTop="@dimen/feature_vertical_margin_top"
             android:orientation="horizontal" >
 
-            <!-- Application section -->
+             Application section
 
             <LinearLayout
                 android:layout_width="180dp"
@@ -123,7 +123,7 @@
                     android:textSize="16sp" />
             </LinearLayout>
 
-            <!-- GRAPH section -->
+             GRAPH section
 
             <FrameLayout
                 android:id="@+id/graph_hrs"
@@ -144,5 +144,89 @@
             android:onClick="onConnectClicked"
             android:text="@string/action_connect" />
 
+  </no.nordicsemi.android.nrftoolbox.widget.ForegroundRelativeLayout>
+    -->
+    <no.nordicsemi.android.nrftoolbox.widget.ForegroundRelativeLayout
+        style="@style/HeaderShadow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@android:color/black">
+    <!--  android:background="@android:color/holo_blue_bright"   -->
+
+
+    <!-- The size of text below must be fixed, therefore dp are used instead of sp -->
+
+    <no.nordicsemi.android.nrftoolbox.widget.TrebuchetTextView
+        android:id="@+id/device_name2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="20dp"
+        android:ellipsize="end"
+        android:freezesText="true"
+        android:maxLines="1"
+        android:text="Shunt Flow Monitor"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@android:color/white" />
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="87dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_weight="1"
+        android:checked="true"
+        android:text="LOG"
+        android:textColor="@android:color/white" />
+
+
+    <Button
+        android:id="@+id/action_connect"
+        style="@style/Widget.Connect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:onClick="onConnectClicked"
+        android:text="@string/action_connect"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+    <TextView
+        android:id="@+id/mybattery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/battery"
+        android:gravity="center"
+        android:text="n/a"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@android:color/white"
+        android:layout_margin="20dp"/>
+    <Switch
+        android:id="@+id/led_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="30dp"
+        android:layout_weight="1"
+        android:checked="false"
+        android:text="Heating"
+        android:textColor="@android:color/white" />
+
+    <FrameLayout
+        android:id="@+id/graph_temp1"
+        android:layout_height="300dp"
+        android:layout_alignParentLeft="true"
+        android:layout_width = "match_parent"
+        android:layout_marginRight = "20dp"
+        android:layout_below="@+id/device_name2"
+        android:layout_above="@id/action_connect"></FrameLayout>
     </no.nordicsemi.android.nrftoolbox.widget.ForegroundRelativeLayout>
 </LinearLayout>

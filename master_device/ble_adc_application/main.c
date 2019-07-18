@@ -60,7 +60,7 @@
 
 
 
-#define DEVICE_NAME                      "JoshChen"                               /**< Name of device. Will be included in the advertising data. */
+#define DEVICE_NAME                      "RhaeosDevice1"                               /**< Name of device. Will be included in the advertising data. */
 #define MANUFACTURER_NAME                "JohnRogersGroup"                       /**< Manufacturer. Will be passed to Device Information Service. */
 #define APP_ADV_INTERVAL                 400                                         /**< The advertising interval (in units of 0.625 ms. This value corresponds to 187.5 ms). */
 #define APP_ADV_TIMEOUT_IN_SECONDS       60                                         /**< The advertising timeout in units of seconds. */
@@ -102,11 +102,11 @@ static ble_hrs_t m_hrs;                                   /**< Structure used to
 
 
 volatile uint8_t state = 1;
-static uint8_t avg_ble_data[24]; 
+static uint8_t avg_ble_data[20]; 
 static uint8_t ble_counter = 0;
 static uint8_t avg_ble_counter = 0;
  
-static uint32_t temp_avg[4];  
+static uint32_t temp_avg[5];  
 
 static nrf_ble_gatt_t m_gatt;                             /**< Structure for gatt module*/
 
@@ -370,13 +370,13 @@ void saadc_callback(nrf_drv_saadc_evt_t const * p_event)
         int i=0;
         int j=0;
         //here?
-        err_code = nrf_drv_saadc_buffer_convert(p_event->data.done.p_buffer, 4);
+        err_code = nrf_drv_saadc_buffer_convert(p_event->data.done.p_buffer, 5);
         APP_ERROR_CHECK(err_code);
 
       
-        uint16_t temp_ch[4];
+        uint16_t temp_ch[5];
 
-        for(i=0;i<4;i++)
+        for(i=0;i<5;i++)
         {
             temp_ch[i]=(uint16_t)(p_event->data.done.p_buffer[i]);
             if(temp_ch[i]>0x0FFF){
@@ -388,7 +388,7 @@ void saadc_callback(nrf_drv_saadc_evt_t const * p_event)
 
         if(ble_counter == 25){     
                         
-            for(j=0;j<4;j++)
+            for(j=0;j<5;j++)
             {
                 temp_avg[j]=(uint32_t)(temp_avg[j]/ble_counter);
                 avg_ble_data[avg_ble_counter++] = (uint8_t)((temp_avg[j] & 0xFF));
@@ -397,7 +397,7 @@ void saadc_callback(nrf_drv_saadc_evt_t const * p_event)
             }
             ble_counter = 0;
 
-            if(avg_ble_counter == 24){ 
+            if(avg_ble_counter == 20){ 
                 err_code = ble_hrs_heart_rate_measurement_send(&m_hrs, avg_ble_data);
                 avg_ble_counter = 0;
             }            
@@ -449,15 +449,24 @@ void saadc_init(void)
         channel_3_config.acq_time = NRF_SAADC_ACQTIME_40US;
 
     err_code = nrf_drv_saadc_channel_init(3, &channel_3_config);
+    APP_ERROR_CHECK(err_code); 
+
+    nrf_saadc_channel_config_t channel_4_config =
+        NRF_DRV_SAADC_DEFAULT_CHANNEL_CONFIG_SE(NRF_SAADC_INPUT_AIN0); 
+        channel_4_config.gain = NRF_SAADC_GAIN1_6;
+        channel_4_config.reference = NRF_SAADC_REFERENCE_INTERNAL;
+        channel_4_config.acq_time = NRF_SAADC_ACQTIME_40US;
+
+    err_code = nrf_drv_saadc_channel_init(4, &channel_4_config);
     APP_ERROR_CHECK(err_code);     
 
     err_code = nrf_drv_saadc_init(&saadc_config, saadc_callback);
     APP_ERROR_CHECK(err_code);    
 
-    err_code = nrf_drv_saadc_buffer_convert(m_buffer_pool[0], 4);
+    err_code = nrf_drv_saadc_buffer_convert(m_buffer_pool[0], 5);
     APP_ERROR_CHECK(err_code);
 
-    err_code = nrf_drv_saadc_buffer_convert(m_buffer_pool[1], 4);
+    err_code = nrf_drv_saadc_buffer_convert(m_buffer_pool[1], 5);
     APP_ERROR_CHECK(err_code);
 
     nrf_saadc_int_enable_check(0x0);
@@ -863,7 +872,7 @@ int main(void)
     #endif
     int i=0;
 
-    for(i=0;i<4;i++)
+    for(i=0;i<5;i++)
     {
         temp_avg[i] = 0;
     }
