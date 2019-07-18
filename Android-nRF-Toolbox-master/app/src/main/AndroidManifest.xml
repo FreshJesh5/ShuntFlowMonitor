@@ -242,22 +242,6 @@
 			</intent-filter>
 		</activity>
 
-		<service
-			android:name="no.nordicsemi.android.nrftoolbox.rsc.RSCService"
-			android:label="@string/rsc_feature_title" />
-		<service
-			android:name="no.nordicsemi.android.nrftoolbox.csc.CSCService"
-			android:label="@string/csc_feature_title" />
-		<service
-			android:name="no.nordicsemi.android.nrftoolbox.hts.HTSService"
-			android:label="@string/hts_feature_title" />
-		<service
-			android:name="no.nordicsemi.android.nrftoolbox.uart.UARTService"
-			android:label="@string/uart_feature_title" />
-
-		<provider android:name="no.nordicsemi.android.nrftoolbox.uart.UARTLocalLogContentProvider"
-			android:authorities="no.nordicsemi.android.nrftoolbox.uart.log"
-			android:exported="true"/>
 	</application>
 
 
