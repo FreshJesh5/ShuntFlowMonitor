@@ -4,7 +4,7 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "no.nordicsemi.android.nrftoolbox"
-        minSdkVersion 18
+        minSdkVersion 23
         targetSdkVersion 26
         versionCode 35
         versionName "1.14.2"
