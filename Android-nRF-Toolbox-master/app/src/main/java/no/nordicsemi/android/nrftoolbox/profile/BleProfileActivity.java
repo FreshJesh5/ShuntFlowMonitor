@@ -101,8 +101,6 @@ public abstract class BleProfileActivity extends AppCompatActivity implements Bl
 			}else{
 				requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
 			}
-		}else{
-			Toast.makeText(this, "Location permissions already granted", Toast.LENGTH_SHORT).show();
 		}
 	}
 
