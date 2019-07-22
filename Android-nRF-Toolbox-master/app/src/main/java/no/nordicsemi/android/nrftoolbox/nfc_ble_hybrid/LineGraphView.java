@@ -98,7 +98,7 @@ public class LineGraphView {
 
 		final XYSeriesRenderer ydata = new XYSeriesRenderer();
 		//set line chart color to Black
-		ydata.setColor(0xFF00FF00);
+		ydata.setColor(Color.rgb(102,0,55));
 		//set line chart style to square points
 		ydata.setPointStyle(PointStyle.CIRCLE);
 		ydata.setLineWidth(5);
@@ -121,17 +121,19 @@ public class LineGraphView {
 
 		final XYMultipleSeriesRenderer renderer = mMultiRenderer;
 		//set whole graph background color to transparent color
-		//renderer.setBackgroundColor(Color.TRANSPARENT);
-		renderer.setMargins(new int[]{50, 120, 50, 10}); // top, left, bottom, right
-		//renderer.setMarginsColor(Color.argb(0x00, 0x05, 0x05, 0x05));
-		renderer.setAxesColor(0xFFFFFFFF);
+		renderer.setBackgroundColor(Color.TRANSPARENT);
+		renderer.setMargins(new int[]{50, 120, 50, 50}); // top, left, bottom, right
+		renderer.setMarginsColor(Color.argb(0x00, 0x01, 0x01, 0x01));
+		renderer.setAxesColor(Color.BLACK);
 		renderer.setShowGrid(true);
-
-		renderer.setLabelsColor(0xFFFFFFFF);
-		//renderer.setYLabelsColor(0, 0xFFFFFFF);
+		renderer.setGridColor(Color.BLACK);
+		renderer.setXLabelsColor(Color.BLACK);
+		//keep scale at 0 or app will crash
+		renderer.setYLabelsColor(0,Color.BLACK);
+		renderer.setLabelsColor(Color.BLACK);
 		renderer.setYLabelsAlign(Align.CENTER);
 		renderer.setYLabelsPadding(30);
-		//renderer.setXLabelsColor(0xFFFFFFFF);
+
 		renderer.setLabelsTextSize(30);
 		renderer.setYAxisMax(10);
 		renderer.setYAxisMin(0);

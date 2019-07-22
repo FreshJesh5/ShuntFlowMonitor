@@ -24,7 +24,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".BPMActivity" >
+    tools:context=".BPMActivity">
+
+
 
     <include layout="@layout/toolbar"
         android:id="@+id/toolbar_actionbar"/>
@@ -151,25 +153,33 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@android:color/black">
+        android:background="@drawable/background_image1"
+        android:backgroundTintMode="screen"
+        android:backgroundTint="@android:color/holo_blue_dark"
+        >
     <!--  android:background="@android:color/holo_blue_bright"   -->
-
 
     <!-- The size of text below must be fixed, therefore dp are used instead of sp -->
 
-    <no.nordicsemi.android.nrftoolbox.widget.TrebuchetTextView
-        android:id="@+id/device_name2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_margin="20dp"
-        android:ellipsize="end"
-        android:freezesText="true"
-        android:maxLines="1"
-        android:text="Shunt Flow Monitor"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@android:color/white" />
+        <no.nordicsemi.android.nrftoolbox.widget.TrebuchetTextView
+            android:id="@+id/device_name2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_margin="20dp"
+            android:layout_centerHorizontal="true"
+            android:ellipsize="end"
+            android:freezesText="true"
+            android:maxLines="1"
+            android:text="Shunt Flow Monitor"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@android:color/black" />
+        <Button
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="back"
+            android:onClick="beginMainActivity"
+            android:layout_margin="20dp"/>
 
     <Switch
         android:id="@+id/switch1"
@@ -182,7 +192,7 @@
         android:layout_weight="1"
         android:checked="true"
         android:text="LOG"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/black" />
 
 
     <Button
@@ -218,15 +228,16 @@
         android:layout_weight="1"
         android:checked="false"
         android:text="Heating"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/black" />
 
-    <FrameLayout
-        android:id="@+id/graph_temp1"
-        android:layout_height="300dp"
-        android:layout_alignParentLeft="true"
-        android:layout_width = "match_parent"
-        android:layout_marginRight = "20dp"
-        android:layout_below="@+id/device_name2"
-        android:layout_above="@id/action_connect"></FrameLayout>
+        <FrameLayout
+            android:id="@+id/graph_temp1"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="70dp"
+            android:layout_height="300dp"
+            android:layout_width = "match_parent"
+            android:layout_below="@+id/device_name2"
+            android:layout_above="@id/action_connect"></FrameLayout>
     </no.nordicsemi.android.nrftoolbox.widget.ForegroundRelativeLayout>
 </LinearLayout>

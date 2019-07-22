@@ -32,6 +32,7 @@ import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Switch;
 import android.widget.CompoundButton;
@@ -46,6 +47,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import no.nordicsemi.android.nrftoolbox.MainActivity;
 import no.nordicsemi.android.nrftoolbox.R;
 import no.nordicsemi.android.nrftoolbox.profile.BleManager;
 import no.nordicsemi.android.nrftoolbox.profile.BleProfileActivity;
@@ -353,6 +355,10 @@ public class NFC_BLE_HYBRID_Activity extends BleProfileActivity implements NFC_B
 		updateBattery(b[0]);
 	}
 
+	public void beginMainActivity(View view) {
+		Intent intent = new Intent(NFC_BLE_HYBRID_Activity.this, MainActivity.class);
+		startActivity(intent);
+	}
 
 	@Override
 	public void onDeviceDisconnected() {
