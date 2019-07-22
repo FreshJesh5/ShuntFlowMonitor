@@ -21,6 +21,7 @@
  */
 package no.nordicsemi.android.nrftoolbox.profile;
 
+import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
@@ -30,6 +31,8 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -89,6 +92,16 @@ public abstract class BleProfileActivity extends AppCompatActivity implements Bl
 		setSupportActionBar(toolbar);
 
 		onViewCreated(savedInstanceState);
+
+		//Josh: initialize permission for BLE
+		int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
+		if (permissionCheck != PackageManager.PERMISSION_GRANTED){
+			if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_COARSE_LOCATION)){
+				Toast.makeText(this, "The permission to get BLE location data is required", Toast.LENGTH_SHORT).show();
+			}else{
+				requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+			}
+		}
 	}
 
 	/**
@@ -185,6 +198,16 @@ public abstract class BleProfileActivity extends AppCompatActivity implements Bl
 	 * Called when user press CONNECT or DISCONNECT button. See layout files -> onClick attribute.
 	 */
 	public void onConnectClicked(final View view) {
+		//Josh: initialize permission for BLE
+		int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
+		if (permissionCheck != PackageManager.PERMISSION_GRANTED){
+			if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_COARSE_LOCATION)){
+				Toast.makeText(this, "The permission to get BLE location data is required", Toast.LENGTH_SHORT).show();
+			}
+			requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+			return;
+		}
+
 		if (isBLEEnabled()) {
 			if (!mDeviceConnected) {
 				setDefaultUI();
