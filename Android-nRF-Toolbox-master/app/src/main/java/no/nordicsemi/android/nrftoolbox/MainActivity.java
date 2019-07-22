@@ -8,7 +8,9 @@ import android.widget.Button;
 import no.nordicsemi.android.nrftoolbox.nfc_ble_hybrid.NFC_BLE_HYBRID_Activity;
 
 public class MainActivity extends AppCompatActivity {
-    private Button mHybridButton;
+    public boolean mFlag1=false;
+    public boolean mFlag2=false;
+    public boolean mFlag3=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
