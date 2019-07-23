@@ -522,6 +522,7 @@ static void on_ble_evt(ble_evt_t * p_ble_evt)
             NVIC_ClearPendingIRQ(SAADC_IRQn);
 
             //clear gpio when device disconnected
+            LEDS_OFF(LEDBUTTON_LED_PIN_NO);
             nrf_drv_gpiote_out_clear(HEAT_EN); 
             nrf_drv_gpiote_out_clear(NFC_EN);
                         
