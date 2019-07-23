@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/background_image1"
+    android:backgroundTintMode="screen"
+    android:backgroundTint="@android:color/holo_blue_dark"
+
+    tools:context=".MainActivity">
+
+    <include layout="@layout/toolbar"
+        android:id="@id/toolbar_actionbar"/>
+
+    <no.nordicsemi.android.nrftoolbox.widget.ForegroundRelativeLayout
+        style="@style/HeaderShadow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:textSize="60dp"
+            android:text="Step 1: Setting Up the Device"
+            android:textColor="@color/featureTitleColor"/>
+
+    </no.nordicsemi.android.nrftoolbox.widget.ForegroundRelativeLayout>
+</LinearLayout>

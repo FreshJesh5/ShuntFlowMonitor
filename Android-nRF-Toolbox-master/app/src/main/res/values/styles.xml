@@ -107,7 +107,7 @@
         <item name="colorAccent">@color/actionBarColorDark</item>
     </style>
 
-    <style name="AppThemeBase" parent="@style/Theme.AppCompat.Light.NoActionBar">
+    <style name="AppThemeBase" parent="@style/Theme.AppCompat.Light.DarkActionBar">
         <item name="android:windowBackground">@drawable/background</item>
         <item name="actionMenuTextColor">@color/actionBarMenuTextColor</item>
         <item name="alertDialogTheme">@style/AppTheme.DialogTheme</item>
@@ -134,7 +134,7 @@
         <item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>
     </style>
 
-    <style name="AppTheme.Fullscreen" parent="@style/Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme.Fullscreen" parent="@style/Theme.AppCompat.Light.DarkActionBar">
         <item name="android:windowBackground">@drawable/background</item>
     </style>
 
