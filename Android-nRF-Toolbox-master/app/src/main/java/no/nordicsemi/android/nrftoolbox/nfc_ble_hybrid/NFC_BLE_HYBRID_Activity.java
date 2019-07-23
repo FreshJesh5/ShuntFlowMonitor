@@ -355,11 +355,9 @@ public class NFC_BLE_HYBRID_Activity extends BleProfileActivity implements NFC_B
 		updateBattery(b[0]);
 	}
 
-	public void onClose(View view) {
-	//	NFC_BLE_HYBRID_Activity.
-	//	Intent intent = new Intent(NFC_BLE_HYBRID_Activity.this, MainActivity.class);
-	//	startActivity(intent);
-		finish();
+	public void beginMainActivity(View view) {
+		Intent intent = new Intent(NFC_BLE_HYBRID_Activity.this, MainActivity.class);
+		startActivity(intent);
 	}
 
 	@Override
@@ -368,14 +366,9 @@ public class NFC_BLE_HYBRID_Activity extends BleProfileActivity implements NFC_B
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				led.setChecked(false);
-			}
-		});
-		runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
 				NewLog = true;
 				stopShowGraph();
+				led.setChecked(false);
 				setDefaultUI();
 			}
 		});

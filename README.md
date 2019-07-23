@@ -6,5 +6,5 @@ git update-index --skip-worktree Android-nRF-Toolbox-master/app/app.iml
 git update-index --skip-worktree DFULibrary/dfu/dfu.iml
 git update-index --skip-worktree Android-nRF-Toolbox-master/.idea/caches/*
 
-to check for skipped files/directories:
+To check for skipped files/directories:
 git ls-files -v | grep ^S
