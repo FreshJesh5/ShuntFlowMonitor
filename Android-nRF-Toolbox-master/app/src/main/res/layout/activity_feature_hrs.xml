@@ -43,86 +43,87 @@
         >
 
         <!-- The size of text below must be fixed, therefore dp are used instead of sp -->
+        <!--
+                <Button
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:text="back"
+                    android:onClick="onClose"
+                    android:layout_margin="20dp"/>
+                <no.nordicsemi.android.nrftoolbox.widget.TrebuchetTextView
+                    android:id="@+id/device_name2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_margin="20dp"
+                    android:layout_centerHorizontal="true"
+                    android:ellipsize="end"
+                    android:freezesText="true"
+                    android:maxLines="1"
+                    android:text="Shunt Flow Monitor"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@android:color/black" />
+                    -->
 
-        <no.nordicsemi.android.nrftoolbox.widget.TrebuchetTextView
-            android:id="@+id/device_name2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_margin="20dp"
-            android:layout_centerHorizontal="true"
-            android:ellipsize="end"
-            android:freezesText="true"
-            android:maxLines="1"
-            android:text="Shunt Flow Monitor"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@android:color/black" />
-
-        <Button
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:text="back"
-            android:onClick="onClose"
-            android:layout_margin="20dp"/>
-        <Switch
-            android:id="@+id/switch1"
-            android:layout_width="87dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="30dp"
-            android:layout_marginLeft="20dp"
-            android:layout_weight="1"
-            android:checked="true"
-            android:text="LOG"
-            android:textColor="@android:color/black" />
+                <Switch
+                    android:id="@+id/switch1"
+                    android:layout_width="87dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="30dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:text="LOG"
+                    android:textColor="@android:color/black" />
 
 
-        <Button
-            android:id="@+id/action_connect"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:onClick="onConnectClicked"
-            android:text="@string/action_connect"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true" />
+                <Button
+                    android:id="@+id/action_connect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:onClick="onConnectClicked"
+                    android:text="@string/action_connect"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true" />
 
-        <TextView
-            android:id="@+id/mybattery"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/battery"
-            android:gravity="center"
-            android:text="n/a"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@android:color/white"
-            android:layout_margin="20dp"/>
-        <Switch
-            android:id="@+id/led_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="30dp"
-            android:layout_weight="1"
-            android:checked="false"
-            android:text="Heating"
-            android:textColor="@android:color/black" />
+                <TextView
+                    android:id="@+id/mybattery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/battery"
+                    android:gravity="center"
+                    android:text="n/a"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/white"
+                    android:layout_margin="20dp"/>
+                <Switch
+                    android:id="@+id/led_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="30dp"
+                    android:layout_weight="1"
+                    android:checked="false"
+                    android:text="Heating"
+                    android:textColor="@android:color/black" />
 
-        <FrameLayout
-            android:id="@+id/graph_temp1"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_marginTop="70dp"
-            android:layout_height="300dp"
-            android:layout_width = "match_parent"
-            android:layout_below="@+id/device_name2"
-            android:layout_above="@id/action_connect"></FrameLayout>
+                <FrameLayout
+                    android:id="@+id/graph_temp1"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginTop="70dp"
+                    android:layout_height="300dp"
+                    android:layout_width = "match_parent"
+                    android:layout_below="@+id/device_name2"
+                    android:layout_above="@id/action_connect"></FrameLayout>
 
-    </no.nordicsemi.android.nrftoolbox.widget.ForegroundRelativeLayout>
+            </no.nordicsemi.android.nrftoolbox.widget.ForegroundRelativeLayout>
 
-</LinearLayout>
+        </LinearLayout>
