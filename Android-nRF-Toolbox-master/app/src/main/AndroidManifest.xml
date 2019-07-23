@@ -1,94 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Copyright (c) 2015, Nordic Semiconductor
-  ~ All rights reserved.
-  ~
-  ~ Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
-  ~
-  ~ 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
-  ~
-  ~ 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the
-  ~ documentation and/or other materials provided with the distribution.
-  ~
-  ~ 3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this
-  ~ software without specific prior written permission.
-  ~
-  ~ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-  ~ LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
-  ~ HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  ~ LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-  ~ ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE
-  ~ USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-  -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="no.nordicsemi.android.nrftoolbox"
+    android:installLocation="auto"
+    android:versionCode="35"
+    android:versionName="1.14.2">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="no.nordicsemi.android.LOG" />
 
+    <uses-feature
+        android:name="android.hardware.bluetooth_le"
+        android:required="true" />
 
-	package="no.nordicsemi.android.nrftoolbox"
-	android:installLocation="auto"
-	android:versionCode="35"
-	android:versionName="1.14.2" >
-
-	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-	<uses-permission android:name="android.permission.INTERNET"/>
-	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-	<uses-permission android:name="android.permission.BLUETOOTH" />
-	<uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-	<uses-permission android:name="no.nordicsemi.android.LOG" />
-
-	<uses-feature
-		android:name="android.hardware.bluetooth_le"
-		android:required="true" />
-
-	<application
-		android:allowBackup="true"
-		android:icon="@drawable/ic_launcher"
-		android:label="@string/app_name"
-		android:theme="@style/AppTheme" >
-
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme">
         <activity
             android:name="com.dropbox.client2.android.AuthActivity"
+            android:configChanges="orientation|keyboard"
             android:launchMode="singleTask"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:configChanges="orientation|keyboard">
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter>
+
                 <!-- Change this to be db- followed by your app key -->
                 <data android:scheme="db-j0ulhf0g8397l0d" />
+
                 <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
-
-
         <activity
-            android:name="no.nordicsemi.android.nrftoolbox.dfu.NotificationActivity"
+            android:name=".dfu.NotificationActivity"
             android:label="@string/dfu_feature_title" />
         <activity
             android:name=".nfc_ble_hybrid.NFC_BLE_HYBRID_Activity"
             android:icon="@drawable/johns_app_launcher"
-            android:label="@string/hrs_feature_title" >
-
-        </activity>
-
+            android:label="Rhaeos Monitor"></activity>
         <activity
-            android:name="no.nordicsemi.android.nrftoolbox.MainActivity"
+            android:name=".MainActivity"
             android:icon="@drawable/johns_app_launcher"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".WalkthroughActivity"></activity>
+
         <service
-            android:name="no.nordicsemi.android.nrftoolbox.proximity.ProximityService"
+            android:name=".proximity.ProximityService"
             android:label="@string/proximity_feature_title" />
         <service
-            android:name="no.nordicsemi.android.nrftoolbox.dfu.DfuService"
+            android:name=".dfu.DfuService"
             android:exported="true"
-            android:label="@string/dfu_service_title" >
+            android:label="@string/dfu_service_title">
             <intent-filter>
                 <action android:name="no.nordicsemi.android.action.DFU_UPLOAD" />
 
@@ -97,156 +72,16 @@
         </service>
 
         <activity
-            android:name="no.nordicsemi.android.nrftoolbox.dfu.DfuInitiatorActivity"
+            android:name=".dfu.DfuInitiatorActivity"
             android:label="@string/dfu_service_title"
             android:noHistory="true"
-            android:theme="@style/AppTheme.Translucent" >
+            android:theme="@style/AppTheme.Translucent">
             <intent-filter>
                 <action android:name="no.nordicsemi.android.action.DFU_UPLOAD" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-		<!--
-	<activity
-			android:name="no.nordicsemi.android.nrftoolbox.SplashscreenActivity"
-			android:label="@string/app_name"
-			android:theme="@style/AppTheme.Fullscreen" >
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN" />
-
-				<category android:name="android.intent.category.LAUNCHER" />
-			</intent-filter>
-		</activity>
-		<activity
-			android:name="no.nordicsemi.android.nrftoolbox.FeaturesActivity"
-			android:label="@string/app_name"
-            android:theme="@style/AppTheme.TranslucentStatusBar"
-			android:launchMode="singleTask" >
-		</activity>
-		-->
-		<!-- Template plugin activities -->
-		<!-- Remember to add your plug-in Activities to the Android Manifest file.
-		<activity
-			android:name="no.nordicsemi.android.nrftoolbox.template.TemplateActivity"
-			android:icon="@drawable/ic_template_feature"
-			android:label="@string/template_feature_title" >
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN" />
-
-				<category android:name="no.nordicsemi.android.nrftoolbox.LAUNCHER" />
-			</intent-filter>
-		</activity>
-		<activity
-			android:name="no.nordicsemi.android.nrftoolbox.template.settings.SettingsActivity"
-			android:label="@string/template_settings_title" />
-		<service
-			android:name="no.nordicsemi.android.nrftoolbox.template.TemplateService"
-			android:label="@string/template_feature_title" />
-
-		 Plug-in activities
-		<activity
-			android:name="no.nordicsemi.android.nrftoolbox.dfu.DfuActivity"
-			android:icon="@drawable/ic_dfu_feature"
-			android:label="@string/dfu_feature_title" >
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN" />
-
-				<category android:name="no.nordicsemi.android.nrftoolbox.LAUNCHER" />
-			</intent-filter>
-		</activity>
-		<activity
-			android:name="no.nordicsemi.android.nrftoolbox.dfu.settings.SettingsActivity"
-			android:label="@string/dfu_settings_title" />
-		-->
-
-		<!--
-		<activity
-			android:name="no.nordicsemi.android.nrftoolbox.hts.HTSActivity"
-			android:icon="@drawable/ic_hts_feature"
-			android:label="@string/hts_feature_title" >
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN" />
-
-				<category android:name="no.nordicsemi.android.nrftoolbox.LAUNCHER" />
-			</intent-filter>
-		</activity>
-		<activity
-			android:name="no.nordicsemi.android.nrftoolbox.hts.settings.SettingsActivity"
-			android:label="@string/hts_settings_title" />
-		<activity
-			android:name="no.nordicsemi.android.nrftoolbox.bpm.BPMActivity"
-			android:icon="@drawable/ic_bpm_feature"
-			android:label="@string/bpm_feature_title" >
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN" />
-
-				<category android:name="no.nordicsemi.android.nrftoolbox.LAUNCHER" />
-			</intent-filter>
-		</activity>
-		<activity
-			android:name="no.nordicsemi.android.nrftoolbox.gls.GlucoseActivity"
-			android:icon="@drawable/ic_glucose_feature"
-			android:label="@string/gls_feature_title" >
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN" />
-
-				<category android:name="no.nordicsemi.android.nrftoolbox.LAUNCHER" />
-			</intent-filter>
-		</activity>
-		<activity
-			android:name="no.nordicsemi.android.nrftoolbox.proximity.ProximityActivity"
-			android:icon="@drawable/ic_proximity_feature"
-			android:label="@string/proximity_feature_title"
-			android:launchMode="singleTask" >
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN" />
-
-				<category android:name="no.nordicsemi.android.nrftoolbox.LAUNCHER" />
-			</intent-filter>
-		</activity>
-		<activity
-			android:name="no.nordicsemi.android.nrftoolbox.rsc.RSCActivity"
-			android:icon="@drawable/ic_rsc_feature"
-			android:label="@string/rsc_feature_title"
-			android:launchMode="singleTask" >
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN" />
-
-				<category android:name="no.nordicsemi.android.nrftoolbox.LAUNCHER" />
-			</intent-filter>
-		</activity>
-		<activity
-			android:name="no.nordicsemi.android.nrftoolbox.rsc.settings.SettingsActivity"
-			android:label="@string/rsc_settings_title" />
-		<activity
-			android:name="no.nordicsemi.android.nrftoolbox.csc.CSCActivity"
-			android:icon="@drawable/ic_csc_feature"
-			android:label="@string/csc_feature_title"
-			android:launchMode="singleTask" >
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN" />
-
-				<category android:name="no.nordicsemi.android.nrftoolbox.LAUNCHER" />
-			</intent-filter>
-		</activity>
-		<activity
-			android:name="no.nordicsemi.android.nrftoolbox.csc.settings.SettingsActivity"
-			android:label="@string/csc_settings_title" />
-		<activity
-			android:name="no.nordicsemi.android.nrftoolbox.uart.UARTActivity"
-			android:icon="@drawable/ic_uart_feature"
-			android:label="@string/uart_feature_title"
-			android:windowSoftInputMode="stateHidden"
-			android:launchMode="singleTask" >
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN" />
-
-				<category android:name="no.nordicsemi.android.nrftoolbox.LAUNCHER" />
-			</intent-filter>
-		</activity> -->
-
-	</application>
-
+    </application>
 
 </manifest>
