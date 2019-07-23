@@ -88,8 +88,8 @@ public abstract class BleProfileActivity extends AppCompatActivity implements Bl
 		onInitialize(savedInstanceState);
 		onCreateView(savedInstanceState);
 
-//		final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
-//		setSupportActionBar(toolbar);
+		final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
+		setSupportActionBar(toolbar);
 
 		onViewCreated(savedInstanceState);
 
