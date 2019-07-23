@@ -22,11 +22,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
     public void beginWalkthroughActivity(android.view.View view) {
-        Intent intent = new Intent(MainActivity.this, NFC_BLE_HYBRID_Activity.class);
-        startActivity(intent);
-    }
-    public void beginFirstActivity(android.view.View view) {
-        Intent intent = new Intent(MainActivity.this, NFC_BLE_HYBRID_Activity.class);
+        Intent intent = new Intent(MainActivity.this, WalkthroughActivity.class);
         startActivity(intent);
     }
 }

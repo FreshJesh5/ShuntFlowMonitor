@@ -21,14 +21,14 @@
     tools:context=".MainActivity">
 
     <include layout="@layout/toolbar"
-        android:id="@+id/toolbar_actionbar"/>
+        android:id="@id/toolbar_actionbar"/>
 
     <no.nordicsemi.android.nrftoolbox.widget.ForegroundRelativeLayout
         style="@style/HeaderShadow"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1">
-
+<!--
         <no.nordicsemi.android.nrftoolbox.widget.TrebuchetTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -38,39 +38,32 @@
             android:text="Rhaeos App"
             android:textColor="@color/featureTitleColor"
             />
+-->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/rhaeoslogo"/>
 
         <Button
             android:id="@+id/MainActivityButtonOne"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
+            android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginLeft="127dp"
-            android:layout_marginBottom="49dp"
+            android:layout_marginBottom="261dp"
             android:onClick="beginHybridActivity"
-            android:text="Begin Taking Data" />
+            android:text="Clinical Mode" />
 
    <!-- style="@style/Widget.Connect" -->
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginLeft="109dp"
-            android:layout_marginBottom="175dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="411dp"
             android:onClick="beginWalkthroughActivity"
-            android:text="Preparing the Device" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="117dp"
-            android:layout_marginTop="357dp"
-            android:onClick="beginFirstActivity"
-            android:text="First Button" />
+            android:text="Walkthrough Mode" />
 
     </no.nordicsemi.android.nrftoolbox.widget.ForegroundRelativeLayout>
 </LinearLayout>

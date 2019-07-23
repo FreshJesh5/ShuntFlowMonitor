@@ -26,4 +26,5 @@ dependencies {
     implementation files('libs/achartengine-1.1.0.jar')
     implementation files('libs/nrf-logger-v2.0.jar')
     implementation files('libs/json_simple-1.1.jar')
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 }
