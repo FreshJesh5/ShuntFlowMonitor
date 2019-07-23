@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+
 <!--
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -28,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1">
-<!--
+
         <no.nordicsemi.android.nrftoolbox.widget.TrebuchetTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -38,48 +38,39 @@
             android:text="Rhaeos App"
             android:textColor="@color/featureTitleColor"
             />
--->
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/rhaeoslogo"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"/>
-<!--
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="107dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:src="@drawable/cbielogo" />
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/northwesternlogo"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"/>
-            -->
         <Button
             android:id="@+id/MainActivityButtonOne"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="263dp"
+            android:layout_marginLeft="127dp"
+            android:layout_marginBottom="49dp"
             android:onClick="beginHybridActivity"
-            android:text="Clinical Mode" />
-       <!-- style="@style/Widget.Connect" -->
+            android:text="Begin Taking Data" />
+
+   <!-- style="@style/Widget.Connect" -->
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
+            android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="429dp"
+            android:layout_marginLeft="109dp"
+            android:layout_marginBottom="175dp"
             android:onClick="beginWalkthroughActivity"
-            android:text="Walkthrough Mode" />
+            android:text="Preparing the Device" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="117dp"
+            android:layout_marginTop="357dp"
+            android:onClick="beginFirstActivity"
+            android:text="First Button" />
 
     </no.nordicsemi.android.nrftoolbox.widget.ForegroundRelativeLayout>
 </LinearLayout>

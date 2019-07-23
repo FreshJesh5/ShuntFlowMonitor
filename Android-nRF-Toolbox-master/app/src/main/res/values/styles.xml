@@ -106,8 +106,8 @@
         <item name="colorPrimaryDark">@color/actionBarColorDark</item>
         <item name="colorAccent">@color/actionBarColorDark</item>
     </style>
-<!-- To remove the Toolbar, change DarkActionBar to NoActionBar in styles.xml,  -->
-    <style name="AppThemeBase" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+
+    <style name="AppThemeBase" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@drawable/background</item>
         <item name="actionMenuTextColor">@color/actionBarMenuTextColor</item>
         <item name="alertDialogTheme">@style/AppTheme.DialogTheme</item>
@@ -134,7 +134,7 @@
         <item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>
     </style>
 
-    <style name="AppTheme.Fullscreen" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme.Fullscreen" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@drawable/background</item>
     </style>
 
