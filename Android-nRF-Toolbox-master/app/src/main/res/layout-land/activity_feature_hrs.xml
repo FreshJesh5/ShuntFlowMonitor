@@ -178,7 +178,7 @@
             android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:text="back"
-            android:onClick="beginMainActivity"
+            android:onClick="onClose"
             android:layout_margin="20dp"/>
 
     <Switch

@@ -1,2 +1,4 @@
 
 Android-nRF-Toolbox-master/app/app.iml___jb_tmp___
+*.ser
+Android-nRF-Toolbox-master/app/build.gradle
