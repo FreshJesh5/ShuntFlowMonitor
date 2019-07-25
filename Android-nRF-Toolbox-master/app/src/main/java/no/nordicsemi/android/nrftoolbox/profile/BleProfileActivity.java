@@ -26,13 +26,17 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -68,6 +72,10 @@ public abstract class BleProfileActivity extends AppCompatActivity implements Bl
 
 	private boolean mDeviceConnected = false;
 	private String mDeviceName;
+
+	LocationManager lm;
+	boolean gps_enabled;
+
 
 	@Override
 	protected final void onCreate(final Bundle savedInstanceState) {
@@ -198,25 +206,53 @@ public abstract class BleProfileActivity extends AppCompatActivity implements Bl
 	 * Called when user press CONNECT or DISCONNECT button. See layout files -> onClick attribute.
 	 */
 	public void onConnectClicked(final View view) {
-		//Josh: initialize permission for BLE
+		//Josh: initialize permission for BLE and if location is enabled
 		int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
+		lm = (LocationManager)this.getSystemService(Context.LOCATION_SERVICE);
+		gps_enabled = false;
+		try {
+			gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+		} catch(Exception ex) {}
+
 		if (permissionCheck != PackageManager.PERMISSION_GRANTED){
 			if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_COARSE_LOCATION)){
-				Toast.makeText(this, "The permission to get BLE location data is required", Toast.LENGTH_SHORT).show();
+				new AlertDialog.Builder(this)
+					.setCancelable(true)
+					.setTitle(R.string.gps_permission_request)
+					.setMessage(R.string.gps_permission_request_rationale)
+					.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+						}
+					})
+					.show();
 			}
-			requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
-			return;
 		}
-
-		if (isBLEEnabled()) {
-			if (!mDeviceConnected) {
-				setDefaultUI();
-				showDeviceScanningDialog(getFilterUUID(), isDiscoverableRequired());
+		else if(!gps_enabled) {
+			// notify user
+			new AlertDialog.Builder(this)
+					.setMessage(R.string.gps_network_not_enabled)
+					.setPositiveButton(R.string.open_location_settings, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+							getApplicationContext().startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+						}
+					})
+					.setNegativeButton(R.string.Cancel,null)
+					.show();
+		}
+		else{
+			if (isBLEEnabled()) {
+				if (!mDeviceConnected) {
+					setDefaultUI();
+					showDeviceScanningDialog(getFilterUUID(), isDiscoverableRequired());
+				} else {
+					mBleManager.disconnect();
+				}
 			} else {
-				mBleManager.disconnect();
+				showBLEDialog();
 			}
-		} else {
-			showBLEDialog();
 		}
 	}
 
