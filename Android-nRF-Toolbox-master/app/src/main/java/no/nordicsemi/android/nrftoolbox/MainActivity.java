@@ -1,8 +1,10 @@
 package no.nordicsemi.android.nrftoolbox;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Button;
 
 import no.nordicsemi.android.nrftoolbox.nfc_ble_hybrid.NFC_BLE_HYBRID_Activity;
@@ -15,7 +17,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-       // mHybridButton = findViewById(R.id.MainActivityButtonOne);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+    public boolean onOptionsItemSelected(MenuItem item){
+        finish();
+        return true;
     }
     public void beginHybridActivity(android.view.View view) {
         Intent intent = new Intent(MainActivity.this, NFC_BLE_HYBRID_Activity.class);
