@@ -57,6 +57,12 @@
     <string name="scanner_subtitle_bonded">BONDED DEVICES:</string>
     <string name="scanner_subtitle__not_bonded">AVAILABLE DEVICES:</string>
 
+    <string name="gps_permission_request">Location permission necessary.</string>
+    <string name="gps_permission_request_rationale">Location permission is necessary for this app to connect to Bluetooth devices.</string>
+    <string name="gps_network_not_enabled">Location must be enabled for connection to device.</string>
+    <string name="open_location_settings">Open location settings.</string>
+    <string name="Cancel">Cancel</string>
+
     <string name="bonding">Bonding with the device&#8230;</string>
     <string name="bonded">The device is now bonded.</string>
 
