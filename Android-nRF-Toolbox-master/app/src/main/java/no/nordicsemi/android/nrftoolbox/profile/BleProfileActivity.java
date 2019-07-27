@@ -102,13 +102,11 @@ public abstract class BleProfileActivity extends AppCompatActivity implements Bl
 		onViewCreated(savedInstanceState);
 
 		//Josh: initialize permission for BLE
-		int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
-		if (permissionCheck != PackageManager.PERMISSION_GRANTED){
-			if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_COARSE_LOCATION)){
-				Toast.makeText(this, "The permission to get BLE location data is required", Toast.LENGTH_SHORT).show();
-			}else{
-				requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
-			}
+		int permissionCheck1 = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
+		int permissionCheck2 = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+		if (permissionCheck1 != PackageManager.PERMISSION_GRANTED || permissionCheck2 != PackageManager.PERMISSION_GRANTED){
+				requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
+						Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
 		}
 	}
 
@@ -228,8 +226,28 @@ public abstract class BleProfileActivity extends AppCompatActivity implements Bl
 					})
 					.show();
 			}
+			return;
 		}
-		else if(!gps_enabled) {
+
+        permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (permissionCheck != PackageManager.PERMISSION_GRANTED){
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)){
+                new AlertDialog.Builder(this)
+                        .setCancelable(true)
+                        .setTitle(R.string.write_permission_request)
+                        .setMessage(R.string.write_permission_request_rationale)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                            }
+                        })
+                        .show();
+            }
+            return;
+        }
+
+		if(!gps_enabled) {
 			// notify user
 			new AlertDialog.Builder(this)
 					.setMessage(R.string.gps_network_not_enabled)
@@ -241,19 +259,19 @@ public abstract class BleProfileActivity extends AppCompatActivity implements Bl
 					})
 					.setNegativeButton(R.string.Cancel,null)
 					.show();
+			return;
 		}
-		else{
-			if (isBLEEnabled()) {
-				if (!mDeviceConnected) {
-					setDefaultUI();
-					showDeviceScanningDialog(getFilterUUID(), isDiscoverableRequired());
-				} else {
-					mBleManager.disconnect();
-				}
-			} else {
-				showBLEDialog();
-			}
-		}
+
+        if (isBLEEnabled()) {
+            if (!mDeviceConnected) {
+                setDefaultUI();
+                showDeviceScanningDialog(getFilterUUID(), isDiscoverableRequired());
+            } else {
+                mBleManager.disconnect();
+            }
+        } else {
+            showBLEDialog();
+        }
 	}
 
 	/**
