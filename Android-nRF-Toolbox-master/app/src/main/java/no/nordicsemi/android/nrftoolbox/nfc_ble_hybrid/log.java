@@ -8,6 +8,7 @@
 package no.nordicsemi.android.nrftoolbox.nfc_ble_hybrid;
 
 import android.os.Environment;
+import android.os.SystemClock;
 import android.util.Log;
 
 import java.io.File;
@@ -23,7 +24,11 @@ public class log {
     private long reference;
     private String name;
     private int counter = 0;
+    private long startTime;
+    private boolean timerStarted;
+
     log() {
+        timerStarted = false;
     }
 
     public void MakeNewLog() {
@@ -40,7 +45,7 @@ public class log {
         try {
             logFile.createNewFile();
             PrintWriter output = new PrintWriter(new FileWriter(logFile, true));
-            output.printf("sample\tx(g)\ty(g)\tz(g)\ta(g)\tb\r\n");
+            output.printf("%s\t%8s\t%8s\t%8s\t%8s\t%8s\t%8s\r\n", "Sample", "Time(s)", "x", "y", "z", "a", "battery");
             output.close();
 
         } catch (IOException e) {
@@ -54,7 +59,16 @@ public class log {
     }
 
     public void appendLog(int[] x,int[] y,int[] z, int[] a, int[] b) {
-        double flow1,flow2,flow3,flow4,batteryval;
+        double flow1,flow2,flow3,flow4,batteryval,time;
+        if (!timerStarted){
+            timerStarted=true;
+            startTime = SystemClock.elapsedRealtime();
+            time = 0.0;
+        }
+        else{
+            time = ((double)(SystemClock.elapsedRealtime() - startTime))/1000;
+        }
+
         try {
             PrintWriter output = new PrintWriter(new FileWriter(logFile, true));
 
@@ -70,7 +84,7 @@ public class log {
                 flow4 = .0035*(a[i]);
                 batteryval = .0035*b[i];
 
-                output.printf("%10.3f\t%8.4f\t%8.4f\t%8.4f\t%8.4f\t%8.4f\r\n",counter/1.0, flow1,flow2,flow3,flow4,batteryval);
+                output.printf("%6d\t%8.3f\t%8.4f\t%8.4f\t%8.4f\t%8.4f\t%8.4f\r\n", counter, time,flow1,flow2,flow3,flow4,batteryval);
                 counter++;
             }
 
