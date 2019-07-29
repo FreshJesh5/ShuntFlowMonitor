@@ -36,6 +36,18 @@
             android:textColor="@android:color/black"
             android:layout_marginTop="30dp"
             android:text = "02:00"/>
+        <ProgressBar
+            android:id="@+id/timerProgressBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:max="120"
+            android:indeterminate="false"
+            android:min="0"
+            android:progress="119" />
     </no.nordicsemi.android.nrftoolbox.widget.ForegroundRelativeLayout>
 
     </LinearLayout>

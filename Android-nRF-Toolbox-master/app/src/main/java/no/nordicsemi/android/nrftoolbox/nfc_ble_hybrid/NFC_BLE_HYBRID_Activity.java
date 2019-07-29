@@ -248,7 +248,7 @@ public class NFC_BLE_HYBRID_Activity extends BleProfileActivity implements NFC_B
 	//and may be slightly off
 	void updateBattery(int b) {
 		double avg = 0;
-		batteryarray[batcount] = b*.1948-367.89;
+		batteryarray[batcount] = (b - .5*4096)/(.13*4096);
 		batcount++;
 		if(batcount == 50) {
 			batcount = 0;
