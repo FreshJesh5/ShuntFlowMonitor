@@ -345,7 +345,7 @@ uint32_t ble_hrs_init(ble_hrs_t * p_hrs, const ble_hrs_init_t * p_hrs_init)
 }
 
 
-uint32_t ble_hrs_heart_rate_measurement_send(ble_hrs_t * p_hrs, uint8_t data[20]) //org:20
+uint32_t ble_hrs_heart_rate_measurement_send(ble_hrs_t * p_hrs, uint8_t data[24]) //org:20
 {
     uint32_t err_code;
 
@@ -357,11 +357,11 @@ uint32_t ble_hrs_heart_rate_measurement_send(ble_hrs_t * p_hrs, uint8_t data[20]
         uint16_t               hvx_len;
         ble_gatts_hvx_params_t hvx_params;
 
-        for(len = 0; len < 20; len++){ //org:20
+        for(len = 0; len < 24; len++){ //org:20
             encoded_hrm[len] = data[len];
 
         }
-        len = 20; //org:20
+        len = 24; //org:20
         hvx_len = len;
 
         memset(&hvx_params, 0, sizeof(hvx_params));

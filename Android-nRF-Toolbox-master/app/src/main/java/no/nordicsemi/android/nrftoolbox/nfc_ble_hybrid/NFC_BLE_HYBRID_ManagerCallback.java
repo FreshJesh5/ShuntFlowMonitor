@@ -40,7 +40,7 @@ public interface NFC_BLE_HYBRID_ManagerCallback extends BleManagerCallbacks {
 	//public void onHRValueReceived(int value);
 	//public void onHRValueReceived(int value1, int value2, int value3, int value4, int value5, int value6,
 	//							    int axis_x,int axis_y,int axis_z);
-	public void onHRValueReceived(int[] x,int[] y,int[] z, int[] a, int[] b);
+	public void onHRValueReceived(int[] x,int[] y,int[] z, int[] a, int[] b, int[] vdd);
 }
 
 

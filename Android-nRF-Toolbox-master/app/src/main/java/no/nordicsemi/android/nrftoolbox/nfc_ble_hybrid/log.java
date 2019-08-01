@@ -45,7 +45,7 @@ public class log {
         try {
             logFile.createNewFile();
             PrintWriter output = new PrintWriter(new FileWriter(logFile, true));
-            output.printf("%s\t%8s\t%8s\t%8s\t%8s\t%8s\t%8s\r\n", "Sample", "Time(s)", "x", "y", "z", "a", "battery");
+            output.printf("%s\t%8s\t%8s\t%8s\t%8s\t%8s\t%8s\t%8s\r\n", "Sample", "Time(s)", "x", "y", "z", "a", "battery", "vdd");
             output.close();
 
         } catch (IOException e) {
@@ -58,8 +58,8 @@ public class log {
         return name;
     }
 
-    public void appendLog(int[] x,int[] y,int[] z, int[] a, int[] b) {
-        double flow1,flow2,flow3,flow4,batteryval,time;
+    public void appendLog(int[] x,int[] y,int[] z, int[] a, int[] b, int[] vdd) {
+        double flow1,flow2,flow3,flow4,batteryval,time, v_sup;
         if (!timerStarted){
             timerStarted=true;
             startTime = SystemClock.elapsedRealtime();
@@ -82,9 +82,10 @@ public class log {
                 flow2 = .0035*(y[i]);
                 flow3 = .0035*(z[i]);
                 flow4 = .0035*(a[i]);
-                batteryval = .0035*b[i];
+                batteryval = b[i];
+                v_sup = vdd[i];
 
-                output.printf("%6d\t%8.3f\t%8.4f\t%8.4f\t%8.4f\t%8.4f\t%8.4f\r\n", counter, time,flow1,flow2,flow3,flow4,batteryval);
+                output.printf("%6d\t%8.3f\t%8.4f\t%8.4f\t%8.4f\t%8.4f\t%8.4f\t%8.4f\r\n", counter, time,flow1,flow2,flow3,flow4,batteryval,v_sup);
                 counter++;
             }
 
