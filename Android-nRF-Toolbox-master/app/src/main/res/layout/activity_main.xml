@@ -64,6 +64,14 @@
             android:layout_marginBottom="411dp"
             android:onClick="beginWalkthroughActivity"
             android:text="Walkthrough Mode" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:onClick="beginWonderActivity"
+            android:layout_marginBottom="50dp"
+            android:text="Please Don't Press Me" />
 
     </no.nordicsemi.android.nrftoolbox.widget.ForegroundRelativeLayout>
 </LinearLayout>

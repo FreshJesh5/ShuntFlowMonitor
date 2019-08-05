@@ -1,12 +1,11 @@
 package no.nordicsemi.android.nrftoolbox;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Button;
 
+import no.nordicsemi.android.nrftoolbox.WalkthroughMasterActivity.WalkthroughMasterActivity;
 import no.nordicsemi.android.nrftoolbox.nfc_ble_hybrid.NFC_BLE_HYBRID_Activity;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,7 +27,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
     public void beginWalkthroughActivity(android.view.View view) {
-        Intent intent = new Intent(MainActivity.this, WalkthroughActivity.class);
+        Intent intent = new Intent(MainActivity.this, WalkthroughMasterActivity.class);
+        startActivity(intent);
+    }
+    public void beginWonderActivity(android.view.View view) {
+        Intent intent = new Intent(MainActivity.this, WonderActivity.class);
         startActivity(intent);
     }
 }
