@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import no.nordicsemi.android.nrftoolbox.R;
 
@@ -25,6 +26,10 @@ public class WalkthroughMasterActivity extends AppCompatActivity
         adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
         vpPager.setAdapter(adapterViewPager);
 
+    }
+    public boolean onOptionsItemSelected(MenuItem item){
+        finish();
+        return true;
     }
 
     @Override
@@ -48,11 +53,9 @@ public class WalkthroughMasterActivity extends AppCompatActivity
         @Override
         public Fragment getItem(int position) {
             switch (position) {
-                case 0: // Fragment # 0 - This will show FirstFragment
+                case 0:
                     return InstructionFragment.newInstance(0, "Page # 1");
-               // case 1: // Fragment # 0 - This will show FirstFragment different title
-               //     return InstructionFragment.newInstance(1, "Page # 2");
-                case 1: // Fragment # 1 - This will show SecondFragment
+                case 1:
                     return TimerFragment.newInstance(1, "Page # 2");
                 default:
                     return null;

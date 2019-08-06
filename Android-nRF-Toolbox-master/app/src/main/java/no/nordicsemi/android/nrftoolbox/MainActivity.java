@@ -34,4 +34,8 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, WonderActivity.class);
         startActivity(intent);
     }
+    public void beginUploadDataActivity(android.view.View view) {
+        Intent intent = new Intent(MainActivity.this, UploadDataActivity.class);
+        startActivity(intent);
+    }
 }

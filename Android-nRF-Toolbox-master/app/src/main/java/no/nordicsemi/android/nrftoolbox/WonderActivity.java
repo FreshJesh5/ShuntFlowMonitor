@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import no.nordicsemi.android.nrftoolbox.WalkthroughMasterActivity.InstructionFragment;
 import no.nordicsemi.android.nrftoolbox.WalkthroughMasterActivity.TimerFragment;
@@ -27,6 +28,12 @@ public class WonderActivity extends AppCompatActivity implements ConnectFragment
         myViewPager = new WonderActivity.MyPagerAdapter(getSupportFragmentManager());
         mpPager.setAdapter(myViewPager);
     }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        finish();
+        return true;
+    }
+
     @Override
     public void onFragmentInteraction(Uri uri) {
         //Handles Communication Between Fragments, Leave Empty for now

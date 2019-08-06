@@ -21,18 +21,14 @@
  */
 package no.nordicsemi.android.nrftoolbox.nfc_ble_hybrid;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Switch;
 import android.widget.CompoundButton;
@@ -40,10 +36,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.achartengine.GraphicalView;
-
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -355,14 +348,12 @@ public class NFC_BLE_HYBRID_Activity extends BleProfileActivity implements NFC_B
 		updateBattery(b[0], vdd[0]);
 	}
 
-	public void beginMainActivity(View view) {
-		Intent intent = new Intent(NFC_BLE_HYBRID_Activity.this, MainActivity.class);
-		startActivity(intent);
-	}
-
 	@Override
 	public void onDeviceDisconnected() {
 		super.onDeviceDisconnected();
+		//Reset the battery level to n/a when device is not connected
+		TextView battery = (TextView) findViewById(R.id.mybattery);
+		battery.setText("n/a");
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
