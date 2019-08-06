@@ -363,6 +363,9 @@ public class NFC_BLE_HYBRID_Activity extends BleProfileActivity implements NFC_B
 	@Override
 	public void onDeviceDisconnected() {
 		super.onDeviceDisconnected();
+        //Reset the battery level to n/a when device is not connected
+        TextView battery = (TextView) findViewById(R.id.mybattery);
+        battery.setText("n/a");
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {

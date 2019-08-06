@@ -55,7 +55,7 @@
             android:text="Clinical Mode" />
 
    <!-- style="@style/Widget.Connect" -->
-
+<!--
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -64,6 +64,6 @@
             android:layout_marginBottom="411dp"
             android:onClick="beginWalkthroughActivity"
             android:text="Walkthrough Mode" />
-
+-->
     </no.nordicsemi.android.nrftoolbox.widget.ForegroundRelativeLayout>
 </LinearLayout>
