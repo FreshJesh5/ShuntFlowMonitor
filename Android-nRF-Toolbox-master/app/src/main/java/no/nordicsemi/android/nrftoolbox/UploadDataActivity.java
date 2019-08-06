@@ -12,9 +12,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class UploadDataActivity extends AppCompatActivity {
 
+    private double x, y, z, a, time;
+    private int count;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,9 +58,7 @@ public class UploadDataActivity extends AppCompatActivity {
                 //reads the text from the file and puts it into the string s, or throws an IO exception
                 //when it does not work
                 try {
-                    String s = readTextFromUri(uri);
-                    //Make a graph by reading the data from string s
-                    makeGraphFromString(s);
+                     readTextFromUri(uri);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -64,21 +66,34 @@ public class UploadDataActivity extends AppCompatActivity {
             }
         }
     }
-    private String readTextFromUri(Uri uri) throws IOException {
+    private void readTextFromUri(Uri uri) throws IOException {
         InputStream inputStream = getContentResolver().openInputStream(uri);
         BufferedReader reader = new BufferedReader(new InputStreamReader(
                 inputStream));
-        StringBuilder stringBuilder = new StringBuilder();
-        String line;
+        String line = reader.readLine();             //skips the first line
+        String[] mValues;
         while ((line = reader.readLine()) != null) {
-            stringBuilder.append(line);
+            //potentially do something with the line here
+           mValues = line.split("\t");
+           try {
+               count = Integer.parseInt(mValues[0]);
+               time = Double.parseDouble(mValues[1]);
+               x = Double.parseDouble(mValues[2]);
+               y = Double.parseDouble(mValues[3]);
+               z = Double.parseDouble(mValues[4]);
+               a = Double.parseDouble(mValues[5]);
+           }
+           catch (Exception e) {
+               //If any of the parse functions do not work, the file is not in the correct format,
+               //and an error message should be presented saying, "incorrect file format"
+            }
+           //Take these values and update the graph similarly to in NFC_BLE_HYBRID_Activity
+
         }
-        //fileInputStream.close();
         inputStream.close();
-        //parcelFileDescriptor.close();
-        return stringBuilder.toString();
     }
+
     private void makeGraphFromString(String s) {
-        
+
     }
 }
