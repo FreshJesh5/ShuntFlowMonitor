@@ -141,18 +141,18 @@ public class NFC_BLE_HYBRID_Manager extends BleManager<NFC_BLE_HYBRID_ManagerCal
 
 
 			for(int i = 0; i<2; i++){
-				x[i] = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT16, i*12);
-				y[i] = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT16, i*12+2);
-				z[i] = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT16, i*12+4);
-				a[i] = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT16, i*12+6);
-				b[i] = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT16,i*12+8);
-				vdd[i] = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT16, i*12+10);
+				x[i] = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT16, i*10);
+				y[i] = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT16, i*10+2);
+				z[i] = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT16, i*10+4);
+				a[i] = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT16, i*10+6);
+				b[i] = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT16,i*10+8);
+			//	vdd[i] = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT16, i*12+10);
 
 
 				//scg[i] =characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UIT16_INVERT, i+10);
 			}
 
-			mCallbacks.onHRValueReceived(x,y,z,a,b,vdd);
+			mCallbacks.onHRValueReceived(x,y,z,a,b);
 
 		}
 

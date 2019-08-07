@@ -1,4 +1,4 @@
-package no.nordicsemi.android.nrftoolbox;
+package no.nordicsemi.android.nrftoolbox.PracticeBleServiceStuff;
 
 import android.net.Uri;
 import android.support.v4.app.Fragment;
@@ -9,9 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import no.nordicsemi.android.nrftoolbox.WalkthroughMasterActivity.InstructionFragment;
-import no.nordicsemi.android.nrftoolbox.WalkthroughMasterActivity.TimerFragment;
-import no.nordicsemi.android.nrftoolbox.WalkthroughMasterActivity.WalkthroughMasterActivity;
+import no.nordicsemi.android.nrftoolbox.R;
 
 public class WonderActivity extends AppCompatActivity implements ConnectFragment.OnFragmentInteractionListener,
         JoshBleFragment.OnFragmentInteractionListener {

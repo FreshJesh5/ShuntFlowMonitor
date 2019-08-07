@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import no.nordicsemi.android.nrftoolbox.R;
 
@@ -28,6 +29,7 @@ public class WalkthroughMasterActivity extends AppCompatActivity
 
     }
     public boolean onOptionsItemSelected(MenuItem item){
+
         finish();
         return true;
     }
@@ -36,6 +38,8 @@ public class WalkthroughMasterActivity extends AppCompatActivity
     public void onFragmentInteraction(Uri uri){
         //Leave Empty
     }
+
+
     public static class MyPagerAdapter extends FragmentPagerAdapter {
         private static int NUM_ITEMS = 2;
 
@@ -63,5 +67,6 @@ public class WalkthroughMasterActivity extends AppCompatActivity
         }
 
     }
+
 
 }

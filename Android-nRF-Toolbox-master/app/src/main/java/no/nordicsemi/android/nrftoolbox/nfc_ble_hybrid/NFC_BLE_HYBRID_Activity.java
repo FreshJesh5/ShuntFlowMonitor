@@ -239,9 +239,9 @@ public class NFC_BLE_HYBRID_Activity extends BleProfileActivity implements NFC_B
 	//function only updates the View every 50 cycles to save computing work, and the conversion
 	//equation used to transform the value in the b array to a percent was found experimentally,
 	//and may be slightly off
-	void updateBattery(int b, int vdd) {
+	void updateBattery(int b) {
 		double avg = 0;
-		batteryarray[batcount] = 100*(b - .5*vdd)/(.13*vdd);    //vdd = 3770 for correct case
+		batteryarray[batcount] = 100*(b - .5*3770)/(.13*3770);    //vdd = 3770 for correct case
 		batcount++;
 		if(batcount == 50) {
 			batcount = 0;
@@ -341,11 +341,11 @@ public class NFC_BLE_HYBRID_Activity extends BleProfileActivity implements NFC_B
 	}
 
 	@Override
-	public void onHRValueReceived(int[] x,int[] y, int[] z, int[] a,int[] b, int[] vdd) {
+	public void onHRValueReceived(int[] x,int[] y, int[] z, int[] a,int[] b) {
 		updateGraph(x,y,z,a);
 
-		datalog.appendLog(x,y,z,a,b,vdd);
-		updateBattery(b[0], vdd[0]);
+		datalog.appendLog(x,y,z,a,b);
+		updateBattery(b[0]);
 	}
 
 	@Override

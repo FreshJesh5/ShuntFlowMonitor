@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import no.nordicsemi.android.nrftoolbox.PracticeBleServiceStuff.WonderActivity;
 import no.nordicsemi.android.nrftoolbox.WalkthroughMasterActivity.WalkthroughMasterActivity;
 import no.nordicsemi.android.nrftoolbox.nfc_ble_hybrid.NFC_BLE_HYBRID_Activity;
 

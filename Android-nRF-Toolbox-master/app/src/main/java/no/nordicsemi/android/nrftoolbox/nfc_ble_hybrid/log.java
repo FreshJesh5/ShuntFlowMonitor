@@ -58,8 +58,8 @@ public class log {
         return name;
     }
 
-    public void appendLog(int[] x,int[] y,int[] z, int[] a, int[] b, int[] vdd) {
-        double flow1,flow2,flow3,flow4,batteryval,time, v_sup;
+    public void appendLog(int[] x,int[] y,int[] z, int[] a, int[] b) {
+        double flow1,flow2,flow3,flow4,batteryval,time;
         if (!timerStarted){
             timerStarted=true;
             startTime = SystemClock.elapsedRealtime();
@@ -83,9 +83,9 @@ public class log {
                 flow3 = .0035*(z[i]);
                 flow4 = .0035*(a[i]);
                 batteryval = b[i];
-                v_sup = vdd[i];
+               // v_sup = vdd[i];
 
-                output.printf("%6d\t%8.3f\t%8.4f\t%8.4f\t%8.4f\t%8.4f\t%8.4f\t%8.4f\r\n", counter, time,flow1,flow2,flow3,flow4,batteryval,v_sup);
+                output.printf("%6d\t%8.3f\t%8.4f\t%8.4f\t%8.4f\t%8.4f\t%8.4f\t%8.4f\r\n", counter, time,flow1,flow2,flow3,flow4,batteryval);
                 counter++;
             }
 

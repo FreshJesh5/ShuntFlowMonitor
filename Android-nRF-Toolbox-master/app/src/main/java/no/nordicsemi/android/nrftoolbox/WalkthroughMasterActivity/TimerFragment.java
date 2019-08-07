@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -81,7 +82,13 @@ public class TimerFragment extends Fragment {
         // TextView tvLabel = (TextView) view.findViewById(R.id.tvLabel);
         //  tvLabel.setText(page + " -- " + title);
         mProgressBar = (ProgressBar) view.findViewById(R.id.timerProgressBar);
-        myTimer.start();
+        final Button button = (Button) view.findViewById(R.id.timerButton);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                //PUT CONNECT CODE HERE TO CONNECT TO BLUETOOTH DEVICE
+                myTimer.start();
+            }
+        });
         return view;
     }
 

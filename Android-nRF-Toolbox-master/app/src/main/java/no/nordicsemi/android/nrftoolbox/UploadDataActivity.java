@@ -7,6 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+
+import org.achartengine.GraphicalView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,15 +18,29 @@ import java.io.InputStreamReader;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import no.nordicsemi.android.nrftoolbox.nfc_ble_hybrid.LineGraphView;
+
 public class UploadDataActivity extends AppCompatActivity {
 
     private double x, y, z, a, time;
     private int count;
+    private LineGraphView mLineGraph = new LineGraphView();
+    private GraphicalView mGraphView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_data);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mLineGraph = mLineGraph.getLineGraphView();
+        showGraph();
+    }
+
+
+    private void showGraph() {
+        mGraphView = mLineGraph.getView(this);
+        ViewGroup layout = (ViewGroup) findViewById(R.id.graph_uploaded);
+        layout.addView(mGraphView);
     }
     public boolean onOptionsItemSelected(MenuItem item){
         finish();
@@ -75,25 +92,25 @@ public class UploadDataActivity extends AppCompatActivity {
         while ((line = reader.readLine()) != null) {
             //potentially do something with the line here
            mValues = line.split("\t");
-           try {
+           //try {
                count = Integer.parseInt(mValues[0]);
                time = Double.parseDouble(mValues[1]);
                x = Double.parseDouble(mValues[2]);
                y = Double.parseDouble(mValues[3]);
                z = Double.parseDouble(mValues[4]);
                a = Double.parseDouble(mValues[5]);
-           }
-           catch (Exception e) {
+               mLineGraph.addValue_x(count,x);
+               mLineGraph.addValue_y(count,y);
+               mLineGraph.addValue_z(count,z);
+               mLineGraph.addValue_a(count,a);
+           //}
+          // catch (Exception e) {
                //If any of the parse functions do not work, the file is not in the correct format,
                //and an error message should be presented saying, "incorrect file format"
-            }
+           // }
            //Take these values and update the graph similarly to in NFC_BLE_HYBRID_Activity
 
         }
         inputStream.close();
-    }
-
-    private void makeGraphFromString(String s) {
-
     }
 }
