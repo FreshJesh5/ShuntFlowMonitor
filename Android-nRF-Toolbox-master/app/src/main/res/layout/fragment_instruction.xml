@@ -26,13 +26,14 @@
             android:text="Step 1: Setting Up the Device"
             android:textColor="@color/featureTitleColor"/>
         <Button
+            android:id="@+id/move_on_from_instruction"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:text="Next"
             android:layout_margin="20dp"
-            android:onClick="beginTimerActivity"
+            android:onClick="beginTimerFragment"
             />
 
 

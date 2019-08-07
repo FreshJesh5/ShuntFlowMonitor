@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import no.nordicsemi.android.nrftoolbox.R;
 
@@ -60,7 +61,6 @@ public class InstructionFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_instruction, container, false);
        // TextView tvLabel = (TextView) view.findViewById(R.id.tvLabel);
-      //  tvLabel.setText(page + " -- " + title);
         return view;
     }
 

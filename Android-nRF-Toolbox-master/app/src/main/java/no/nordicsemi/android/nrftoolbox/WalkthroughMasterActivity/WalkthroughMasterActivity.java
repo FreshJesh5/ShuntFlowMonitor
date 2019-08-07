@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 
 import no.nordicsemi.android.nrftoolbox.R;
 
@@ -16,20 +17,40 @@ public class WalkthroughMasterActivity extends AppCompatActivity
         implements TimerFragment.OnFragmentInteractionListener,
                    InstructionFragment.OnFragmentInteractionListener {
 
-    FragmentPagerAdapter adapterViewPager;
+    private FragmentPagerAdapter adapterViewPager;
+    private ViewPager vpPager;
+    /*
+    private TimerFragment.OnFragmentInteractionListener timerListener;
+    private InstructionFragment.OnFragmentInteractionListener instructionListener = this;
+
+    public void setTimerListener(TimerFragment.OnFragmentInteractionListener listener) {
+        this.timerListener = listener;
+}
+*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_walkthrough_master);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ViewPager vpPager = (ViewPager) findViewById(R.id.vpPager);
+        vpPager = (ViewPager) findViewById(R.id.vpPager);
         adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
         vpPager.setAdapter(adapterViewPager);
-
     }
-    public boolean onOptionsItemSelected(MenuItem item){
 
+    public void beginTimerFragment(android.view.View view) {
+        vpPager.setCurrentItem(2);
+    }
+    /*
+    final Button button = (Button) findViewById(R.id.move_on_from_instruction);
+        button.setOnClickListener(new View.OnClickListener() {
+        public void onClick(View v) {
+            vpPager.setCurrentItem(2);
+        }
+    });
+    */
+
+    public boolean onOptionsItemSelected(MenuItem item){
         finish();
         return true;
     }
@@ -38,7 +59,6 @@ public class WalkthroughMasterActivity extends AppCompatActivity
     public void onFragmentInteraction(Uri uri){
         //Leave Empty
     }
-
 
     public static class MyPagerAdapter extends FragmentPagerAdapter {
         private static int NUM_ITEMS = 2;
