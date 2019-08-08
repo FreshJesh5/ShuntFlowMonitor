@@ -41,14 +41,6 @@ public class WalkthroughMasterActivity extends AppCompatActivity
     public void beginTimerFragment(android.view.View view) {
         vpPager.setCurrentItem(2);
     }
-    /*
-    final Button button = (Button) findViewById(R.id.move_on_from_instruction);
-        button.setOnClickListener(new View.OnClickListener() {
-        public void onClick(View v) {
-            vpPager.setCurrentItem(2);
-        }
-    });
-    */
 
     public boolean onOptionsItemSelected(MenuItem item){
         finish();

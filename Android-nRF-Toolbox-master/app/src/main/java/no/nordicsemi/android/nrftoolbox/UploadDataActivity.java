@@ -41,6 +41,8 @@ public class UploadDataActivity extends AppCompatActivity {
         mGraphView = mLineGraph.getView(this);
         ViewGroup layout = (ViewGroup) findViewById(R.id.graph_uploaded);
         layout.addView(mGraphView);
+        mGraphView.repaint();
+        mLineGraph.setZoomPan();
     }
     public boolean onOptionsItemSelected(MenuItem item){
         finish();
@@ -89,28 +91,36 @@ public class UploadDataActivity extends AppCompatActivity {
                 inputStream));
         String line = reader.readLine();             //skips the first line
         String[] mValues;
+        if (count != 0) {
+            //reset the graph
+            mLineGraph.clearGraph();
+            mGraphView.repaint();
+            count = 0;
+        }
         while ((line = reader.readLine()) != null) {
-            //potentially do something with the line here
-           mValues = line.split("\t");
-           //try {
-               count = Integer.parseInt(mValues[0]);
-               time = Double.parseDouble(mValues[1]);
-               x = Double.parseDouble(mValues[2]);
-               y = Double.parseDouble(mValues[3]);
-               z = Double.parseDouble(mValues[4]);
-               a = Double.parseDouble(mValues[5]);
-               mLineGraph.addValue_x(count,x);
-               mLineGraph.addValue_y(count,y);
-               mLineGraph.addValue_z(count,z);
-               mLineGraph.addValue_a(count,a);
-           //}
-          // catch (Exception e) {
+            mValues = line.split("\t");
+            x = Double.parseDouble(mValues[2]);
+            y = Double.parseDouble(mValues[3]);
+            z = Double.parseDouble(mValues[4]);
+            a = Double.parseDouble(mValues[5]);
+            //Take these values and update the graph similarly to in NFC_BLE_HYBRID_Activity
+           updateGraph();
                //If any of the parse functions do not work, the file is not in the correct format,
                //and an error message should be presented saying, "incorrect file format"
-           // }
-           //Take these values and update the graph similarly to in NFC_BLE_HYBRID_Activity
-
         }
         inputStream.close();
+    }
+    private void updateGraph() {
+        mLineGraph.addValue_x(count,x);
+        mLineGraph.addValue_y(count,y);
+        mLineGraph.addValue_z(count,z);
+        mLineGraph.addValue_a(count,a);
+        mGraphView.repaint();
+        count++;
+    }
+    public void resetGraph(View view) {
+        mLineGraph.clearGraph();
+        mGraphView.repaint();
+        count = 0;
     }
 }

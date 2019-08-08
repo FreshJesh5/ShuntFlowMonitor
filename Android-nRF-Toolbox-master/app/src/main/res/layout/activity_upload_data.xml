@@ -27,6 +27,17 @@
             android:layout_marginBottom="50dp"
             android:onClick="opentheDocument"
             />
+        <!--
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:text="Clear Graph"
+            android:layout_marginTop="50dp"
+            android:onClick="resetGraph"
+            />
+            -->
         <FrameLayout
             android:id="@+id/graph_uploaded"
             android:layout_alignParentTop="true"

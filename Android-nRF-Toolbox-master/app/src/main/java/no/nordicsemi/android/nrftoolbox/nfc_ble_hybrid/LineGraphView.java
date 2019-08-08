@@ -119,7 +119,7 @@ public class LineGraphView {
 		adata.setFillPoints(true);
 		adata.setLineWidth(5);
 
-		final XYMultipleSeriesRenderer renderer = mMultiRenderer;
+		XYMultipleSeriesRenderer renderer = mMultiRenderer;
 		//set whole graph background color to transparent color
 		renderer.setBackgroundColor(Color.TRANSPARENT);
 		renderer.setMargins(new int[]{50, 120, 50, 50}); // top, left, bottom, right
@@ -167,6 +167,10 @@ public class LineGraphView {
 	}
 
 
+	public void setZoomPan() {
+		mMultiRenderer.setZoomEnabled(true,true);
+		mMultiRenderer.setPanEnabled(true,true);
+	}
 	//this is the second function
 
 
