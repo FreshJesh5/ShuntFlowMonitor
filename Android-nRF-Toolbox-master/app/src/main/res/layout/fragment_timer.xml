@@ -26,6 +26,7 @@
             android:layout_centerHorizontal="true"
             android:text="Connect"
             android:layout_margin="20dp" />
+        <!--android:onClick="onClickTimerButton" -->
         <TextView
             android:id="@+id/clock"
             android:layout_width="wrap_content"
@@ -73,6 +74,16 @@
             android:layout_centerVertical="true"
             android:textSize="20dp"
             android:text="0%"
+            />
+        <TextView
+            android:id="@+id/stableText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="200dp"
+            android:textSize="20dp"
+            android:text="Device is stabilizing... Please wait"
             />
     </no.nordicsemi.android.nrftoolbox.widget.ForegroundRelativeLayout>
 

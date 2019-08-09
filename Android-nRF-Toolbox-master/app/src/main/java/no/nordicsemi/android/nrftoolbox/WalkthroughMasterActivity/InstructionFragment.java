@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import no.nordicsemi.android.nrftoolbox.MainActivity;
 import no.nordicsemi.android.nrftoolbox.R;
 
 
@@ -22,7 +23,6 @@ import no.nordicsemi.android.nrftoolbox.R;
  */
 
 public class InstructionFragment extends Fragment {
-    // Store instance variables
     private String title;
     private int page;
 
@@ -54,18 +54,28 @@ public class InstructionFragment extends Fragment {
         super.onCreate(savedInstanceState);
         page = getArguments().getInt("someInt", 0);
         title = getArguments().getString("someTitle");
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_instruction, container, false);
-       // TextView tvLabel = (TextView) view.findViewById(R.id.tvLabel);
+        view.findViewById(R.id.move_on_from_instruction).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //when the instruction button is pressed, it should move onto the next fragment(timer)
+                //and ALSO start the timer
+                //model.doAction();
+                ((WalkthroughMasterActivity)getActivity()).setVpPager(1);
+                ((WalkthroughMasterActivity)getActivity()).startTheTimer();
+            }
+        });
         return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
+    public void ononClickWalkthroughButton(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
