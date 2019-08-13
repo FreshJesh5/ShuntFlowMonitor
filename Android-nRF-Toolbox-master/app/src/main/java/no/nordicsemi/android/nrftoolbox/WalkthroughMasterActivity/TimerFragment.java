@@ -1,7 +1,5 @@
 package no.nordicsemi.android.nrftoolbox.WalkthroughMasterActivity;
 
-import android.arch.lifecycle.ViewModelProvider;
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;

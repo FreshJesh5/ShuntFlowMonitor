@@ -1,6 +1,5 @@
 package no.nordicsemi.android.nrftoolbox.WalkthroughMasterActivity;
 
-import android.arch.lifecycle.ViewModel;
 import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

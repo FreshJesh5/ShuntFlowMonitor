@@ -343,9 +343,8 @@ public class NFC_BLE_HYBRID_Activity extends BleProfileActivity implements NFC_B
 	@Override
 	public void onHRValueReceived(int[] x,int[] y, int[] z, int[] a,int[] b) {
 		updateGraph(x,y,z,a);
-
-		datalog.appendLog(x,y,z,a,b);
 		updateBattery(b[0]);
+		datalog.appendLog(x,y,z,a,b);
 	}
 
 	@Override
