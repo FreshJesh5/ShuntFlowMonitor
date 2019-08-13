@@ -45,7 +45,7 @@ public class log {
         try {
             logFile.createNewFile();
             PrintWriter output = new PrintWriter(new FileWriter(logFile, true));
-            output.printf("%s\t%8s\t%8s\t%8s\t%8s\t%8s\t%8s\t%8s\r\n", "Sample", "Time(s)", "x", "y", "z", "a", "battery", "vdd");
+            output.printf("%s\t%8s\t%8s\t%8s\t%8s\t%8s\t%8s\r\n", "Sample", "Time(s)", "x", "y", "z", "a", "battery");
             output.close();
 
         } catch (IOException e) {
@@ -74,7 +74,7 @@ public class log {
 
             //String outputstring = "";
 
-            Log.v("log", "writting to file");
+            //Log.v("log", "writing to file");
 
 
             for(int i = 0; i < 2; i++){
@@ -85,7 +85,7 @@ public class log {
                 batteryval = b[i];
                // v_sup = vdd[i];
 
-                output.printf("%6d\t%8.3f\t%8.4f\t%8.4f\t%8.4f\t%8.4f\t%8.4f\t%8.4f\r\n", counter, time,flow1,flow2,flow3,flow4,batteryval);
+                output.printf("%6d\t%8.3f\t%8.4f\t%8.4f\t%8.4f\t%8.4f\t%8.4f\r\n", counter, time,flow1,flow2,flow3,flow4,batteryval);
                 counter++;
             }
 

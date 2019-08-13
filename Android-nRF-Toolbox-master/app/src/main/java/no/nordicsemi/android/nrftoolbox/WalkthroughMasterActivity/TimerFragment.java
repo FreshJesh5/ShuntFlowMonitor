@@ -58,8 +58,6 @@ public class TimerFragment extends Fragment {
         }
         //Tells the system what to do once the timer is finished
         public void onFinish() {
-            //final Button button = (Button) getView().findViewById(R.id.timerButton);
-            //button.setClickable(true);
             timerButton.setVisibility(View.VISIBLE);
         }
     };
@@ -96,6 +94,7 @@ public class TimerFragment extends Fragment {
         timerButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //do something when the timer button is pressed, like move onto the next fragment(Contact Test)
+                ((WalkthroughMasterActivity) getActivity()).setVpPager(2);
             }
         });
         return view;

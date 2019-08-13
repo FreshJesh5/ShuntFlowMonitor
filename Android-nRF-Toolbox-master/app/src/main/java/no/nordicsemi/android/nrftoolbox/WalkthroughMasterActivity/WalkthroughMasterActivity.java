@@ -16,7 +16,8 @@ import no.nordicsemi.android.nrftoolbox.R;
 
 public class WalkthroughMasterActivity extends AppCompatActivity
         implements TimerFragment.OnFragmentInteractionListener,
-                   InstructionFragment.OnFragmentInteractionListener {
+                   InstructionFragment.OnFragmentInteractionListener,
+                    ContactTestFragment.OnFragmentInteractionListener {
 
     private MyPagerAdapter pagerAdapter;
     private ViewPager vpPager;
@@ -33,6 +34,7 @@ public class WalkthroughMasterActivity extends AppCompatActivity
         pagerAdapter = new MyPagerAdapter(getSupportFragmentManager());
         pagerAdapter.addFragment(InstructionFragment.newInstance(0,"page #1"));
         pagerAdapter.addFragment(TimerFragment.newInstance(1,"Page #2"));
+        pagerAdapter.addFragment(ContactTestFragment.newInstance("2","page #3"));
         vpPager.setAdapter(pagerAdapter);
     }
 
@@ -57,7 +59,7 @@ public class WalkthroughMasterActivity extends AppCompatActivity
 
 
     public static class MyPagerAdapter extends FragmentStatePagerAdapter {
-        private static int NUM_ITEMS = 2;
+        private static int NUM_ITEMS = 3;
         private final List<Fragment> mFragmentList = new ArrayList<>();
 
         public MyPagerAdapter(FragmentManager fragmentManager) {
