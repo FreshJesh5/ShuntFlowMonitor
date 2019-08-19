@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import no.nordicsemi.android.nrftoolbox.R;
 
@@ -76,6 +77,13 @@ public class ContactTestFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_contact_test, container, false);
     }
 
+    //find button for BleProfileActivity
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState){
+        super.onViewCreated(view,savedInstanceState);
+        ((WalkthroughMasterActivity)getActivity()).findFragmentConnectButton((Button) getView().findViewById(R.id.whywontyouwork));
+    }
+
     public void doContactTest(String isredupstream) {
         //mParam1 should be isredupstream hopefully, or maybe not
         //first test if delta temperature for both sensors is less than 2 degrees
@@ -115,6 +123,7 @@ public class ContactTestFragment extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
+
     }
 
     @Override

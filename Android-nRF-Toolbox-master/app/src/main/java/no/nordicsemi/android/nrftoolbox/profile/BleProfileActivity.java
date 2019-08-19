@@ -128,7 +128,7 @@ public abstract class BleProfileActivity extends AppCompatActivity implements Bl
 
 	/**
 	 * Called after the view has been created.
-	 *
+	 * used to be final
 	 * @param savedInstanceState
 	 */
 	protected final void onViewCreated(final Bundle savedInstanceState) {
@@ -137,6 +137,13 @@ public abstract class BleProfileActivity extends AppCompatActivity implements Bl
 		mConnectButton = (Button) findViewById(R.id.action_connect);
 		mDeviceNameView = (TextView) findViewById(R.id.device_name);
 		mBatteryLevelView = (TextView) findViewById(R.id.battery);
+	}
+
+	/**
+	 * Used for finding Fragment connect button
+	 */
+	public void findFragmentConnectButton(Button mButton){
+		mConnectButton = mButton;
 	}
 
 	@Override

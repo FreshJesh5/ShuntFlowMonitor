@@ -27,7 +27,7 @@ public class log {
     private long startTime;
     private boolean timerStarted;
 
-    log() {
+    public log() {
         timerStarted = false;
     }
 
@@ -94,7 +94,7 @@ public class log {
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-            Log.v("log", "not working");
+            Log.v("log", "log not working");
         }
 
     }
