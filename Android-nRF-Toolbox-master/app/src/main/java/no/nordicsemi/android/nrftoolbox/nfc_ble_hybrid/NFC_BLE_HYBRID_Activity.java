@@ -117,9 +117,6 @@ public class NFC_BLE_HYBRID_Activity extends BleProfileActivity implements NFC_B
 				}
 			}
 		});
-
-		//	initialize_session();
-
 	}
 
 
@@ -175,22 +172,6 @@ public class NFC_BLE_HYBRID_Activity extends BleProfileActivity implements NFC_B
 		stopShowGraph();
 	}
 
-	/*
-        @Override
-        protected int getLoggerProfileTitle() {
-            return R.string.hrs_feature_title;
-        }
-
-        @Override
-        protected int getAboutTextId() {
-            return R.string.hrs_about_text;
-        }
-
-        @Override
-        protected int getDefaultDeviceName() {
-            return R.string.hrs_default_name;
-        }
-    */
 	@Override
 	protected UUID getFilterUUID() {
 		return NFC_BLE_HYBRID_Manager.HR_SERVICE_UUID;
@@ -201,17 +182,6 @@ public class NFC_BLE_HYBRID_Activity extends BleProfileActivity implements NFC_B
 	protected int getLoggerProfileTitle() {
 		return R.string.hrs_feature_title;
 	}
-
-	@Override
-	protected int getAboutTextId() {
-		return R.string.hrs_about_text;
-	}
-
-	@Override
-	protected int getDefaultDeviceName() {
-		return R.string.hrs_default_name;
-	}
-
 
 
 	void updateGraph(int[] x,int[] y, int[] z, int[] a) {

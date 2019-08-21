@@ -26,7 +26,7 @@ public class TimerFragment extends Fragment {
     private Button timerButton;
 
     private ProgressBar mProgressBar;
-    CountDownTimer myTimer = new CountDownTimer(120000,1000) {
+    CountDownTimer myTimer = new CountDownTimer(10000,1000) {//cDI is 120000
 
         private TextView tv;
         //Creates the display used by the clock and updates it along with the progress bar every second

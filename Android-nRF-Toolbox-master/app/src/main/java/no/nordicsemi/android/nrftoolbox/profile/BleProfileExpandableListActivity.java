@@ -289,16 +289,6 @@ public abstract class BleProfileExpandableListActivity extends ExpandableListAct
 	}
 
 	@Override
-	public void onBatteryValueReceived(final int value) {
-		runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				mBatteryLevelView.setText(getString(R.string.battery, value));
-			}
-		});
-	}
-
-	@Override
 	public void onBondingRequired() {
 		showToast(R.string.bonding);
 	}

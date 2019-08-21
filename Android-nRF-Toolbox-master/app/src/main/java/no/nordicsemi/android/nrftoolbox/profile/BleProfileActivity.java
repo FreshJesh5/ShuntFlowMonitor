@@ -66,7 +66,7 @@ public abstract class BleProfileActivity extends AppCompatActivity implements Bl
 	private BleManager<? extends BleManagerCallbacks> mBleManager;
 
 	private TextView mDeviceNameView;
-	private TextView mBatteryLevelView;
+	//private TextView mBatteryLevelView;
 	private Button mConnectButton;
 	private ILogSession mLogSession;
 
@@ -136,7 +136,7 @@ public abstract class BleProfileActivity extends AppCompatActivity implements Bl
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		mConnectButton = (Button) findViewById(R.id.action_connect);
 		mDeviceNameView = (TextView) findViewById(R.id.device_name);
-		mBatteryLevelView = (TextView) findViewById(R.id.battery);
+		//mBatteryLevelView = (TextView) findViewById(R.id.battery);
 	}
 
 	/**
@@ -197,10 +197,10 @@ public abstract class BleProfileActivity extends AppCompatActivity implements Bl
 			case android.R.id.home:
 				onBackPressed();
 				break;
-			case R.id.action_about:
-				final AppHelpFragment fragment = AppHelpFragment.getInstance(getAboutTextId());
-				fragment.show(getSupportFragmentManager(), "help_fragment");
-				break;
+			//case R.id.action_about:
+				//final AppHelpFragment fragment = AppHelpFragment.getInstance(getAboutTextId());
+				//fragment.show(getSupportFragmentManager(), "help_fragment");
+			//	break;
 			default:
 				return onOptionsItemSelected(id);
 		}
@@ -357,12 +357,12 @@ public abstract class BleProfileActivity extends AppCompatActivity implements Bl
 			@Override
 			public void run() {
 				mConnectButton.setText(R.string.action_connect);
-				mDeviceNameView.setText(getDefaultDeviceName());
+				//mDeviceNameView.setText(getDefaultDeviceName());
 				//		mBatteryLevelView.setText(R.string.not_available);
 			}
 		});
 	}
-
+/*
 	@Override
 	public void onBatteryValueReceived(final int value) {
 		runOnUiThread(new Runnable() {
@@ -372,7 +372,7 @@ public abstract class BleProfileActivity extends AppCompatActivity implements Bl
 			}
 		});
 	}
-
+*/
 	@Override
 	public void onBondingRequired() {
 		showToast(R.string.bonding);
@@ -431,12 +431,6 @@ public abstract class BleProfileActivity extends AppCompatActivity implements Bl
 		return mDeviceConnected;
 	}
 
-	/**
-	 * Returns the name of the device that the phone is currently connected to or was connected last time
-	 */
-	protected String getDeviceName() {
-		return mDeviceName;
-	}
 
 	/**
 	 * Initializes the Bluetooth Low Energy manager. A manager is used to communicate with profile's services.
@@ -449,21 +443,6 @@ public abstract class BleProfileActivity extends AppCompatActivity implements Bl
 	 * Restores the default UI before reconnecting
 	 */
 	protected abstract void setDefaultUI();
-
-	/**
-	 * Returns the default device name resource id. The real device name is obtained when connecting to the device. This one is used when device has
-	 * disconnected.
-	 *
-	 * @return the default device name resource id
-	 */
-	protected abstract int getDefaultDeviceName();
-
-	/**
-	 * Returns the string resource id that will be shown in About box
-	 *
-	 * @return the about resource id
-	 */
-	protected abstract int getAboutTextId();
 
 	/**
 	 * The UUID filter is used to filter out available devices that does not have such UUID in their advertisement packet. See also:

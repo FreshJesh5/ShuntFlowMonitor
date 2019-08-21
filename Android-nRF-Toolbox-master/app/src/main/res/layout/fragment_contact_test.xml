@@ -36,6 +36,86 @@
             android:layout_margin="20dp"
             />
 
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true">
+            <TableRow
+                android:background="@android:color/holo_blue_dark">
+                <TextView
+                    android:textColor="@android:color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="                 "/>
+
+                <TextView
+                    android:textColor="@android:color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="First up/down"/>
+                <TextView
+                    android:textColor="@android:color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="    Last up/down    "/>
+            </TableRow>
+            <TableRow
+                android:background="@color/darkGray"
+                android:backgroundTintMode="screen">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Yellow Values"
+                    android:gravity="center"/>
+                <TextView
+                    android:id="@+id/myyellowval"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="no"
+                    android:gravity="center"/>
+                <TextView
+                    android:id="@+id/my_sec_yellow_val"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="no"
+                    android:layout_gravity="center"/>
+            </TableRow>
+            <TableRow
+                android:background="@android:color/background_light">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Green Values"
+                    android:gravity="center"/>
+                <TextView
+                    android:id="@+id/mygreenval"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@id/instruction_spinner_one"
+                    android:text="no"
+                    android:layout_centerVertical="true"
+                    android:gravity="center"/>
+                <TextView
+                    android:id="@+id/my_sec_greenval"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="no"
+                    android:layout_gravity="center"/>
+
+            </TableRow>
+        </TableLayout>
+
+        <TextView
+            android:id="@+id/no_fail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="200dp"
+            />
 
     </no.nordicsemi.android.nrftoolbox.widget.ForegroundRelativeLayout>
 

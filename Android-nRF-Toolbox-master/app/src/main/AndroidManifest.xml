@@ -23,7 +23,6 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity android:name=".UploadDataActivity"></activity>
-        <activity android:name=".PracticeBleServiceStuff.WonderActivity" />
         <activity android:name=".WalkthroughMasterActivity.WalkthroughMasterActivity" />
         <activity
             android:name="com.dropbox.client2.android.AuthActivity"

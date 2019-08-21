@@ -3,11 +3,11 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:orientation="vertical">
 
-<android.support.v4.view.ViewPager
+<no.nordicsemi.android.nrftoolbox.widget.NonSwipeableViewPager
     android:id="@+id/vpPager"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-</android.support.v4.view.ViewPager>
+</no.nordicsemi.android.nrftoolbox.widget.NonSwipeableViewPager>
 </LinearLayout>
 <!--
     <?xml version="1.0" encoding="utf-8"?>

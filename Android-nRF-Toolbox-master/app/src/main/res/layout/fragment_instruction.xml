@@ -22,20 +22,68 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:textSize="60dp"
             android:text="Step 1: Setting Up the Device"
-            android:textColor="@color/featureTitleColor"/>
+            android:textColor="@color/featureTitleColor"
+            android:textSize="60dp" />
+
         <Button
             android:id="@+id/move_on_from_instruction"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:text="Next"
             android:layout_margin="20dp"
-            android:onClick="beginTimerFragment"
-            />
+            android:text="Next" />
 
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true">
+            <TableRow
+                android:background="@android:color/holo_blue_dark">
+                <TextView
+                    android:textColor="@android:color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Color Dot"/>
+                <TextView
+                    android:textColor="@android:color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="    Orientation    "/>
+            </TableRow>
+            <TableRow
+                android:background="@color/darkGray"
+                android:backgroundTintMode="screen">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Green"
+                    android:gravity="center"/>
+                <Spinner
+                    android:id="@+id/instruction_spinner_one"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"></Spinner>
+            </TableRow>
+            <TableRow
+                android:background="@android:color/background_light">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@id/instruction_spinner_one"
+                    android:text="Yellow"
+                    android:layout_centerVertical="true"
+                    android:gravity="center"/>
+
+                <Spinner
+                    android:id="@+id/instruction_spinner_two"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"></Spinner>
+            </TableRow>
+        </TableLayout>
 
     </no.nordicsemi.android.nrftoolbox.widget.ForegroundRelativeLayout>
 </LinearLayout>

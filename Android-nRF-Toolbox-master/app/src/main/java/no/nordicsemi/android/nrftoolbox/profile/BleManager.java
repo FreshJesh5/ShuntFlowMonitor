@@ -728,7 +728,7 @@ public abstract class BleManager<E extends BleManagerCallbacks> {
 				if (isBatteryLevelCharacteristic(characteristic)) {
 					final int batteryValue = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT8, 0);
 					Logger.a(mLogSession, "Battery level received: " + batteryValue + "%");
-					mCallbacks.onBatteryValueReceived(batteryValue);
+
 
 					// The Battery Level value has been read. Let's try to enable Battery Level notifications.
 					// If the Battery Level characteristic does not have the NOTIFY property, proceed with the initialization queue.

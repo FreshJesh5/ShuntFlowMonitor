@@ -43,6 +43,10 @@ public class LineGraphView {
 	private TimeSeries axisySeries = new TimeSeries("y");
 	private TimeSeries axiszSeries = new TimeSeries("z");
 	private TimeSeries axisaSeries = new TimeSeries("a");
+//TO DO: CREATE A SETTITLE FUNCTION THAT WILL CHANGE THE NAMES OF THESE SERIES TO UPSTREAM AND DOWNSTREAM
+	public void setTimeSeriesTitle(TimeSeries mySeries, String title) {
+		mySeries.setTitle(title);
+	}
 	//XYMultipleSeriesDataset will contain all the TimeSeries
 	private XYMultipleSeriesDataset mDataset = new XYMultipleSeriesDataset();
 	//XYMultipleSeriesRenderer will contain all XYSeriesRenderer and it can be used to set the properties of whole Graph

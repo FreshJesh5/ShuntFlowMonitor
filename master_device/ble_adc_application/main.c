@@ -60,7 +60,7 @@
 
 
 
-#define DEVICE_NAME                      "RhaeosDevice1"                               /**< Name of device. Will be included in the advertising data. */
+#define DEVICE_NAME                      "Rhaeos_5ch"                               /**< Name of device. Will be included in the advertising data. */
 #define MANUFACTURER_NAME                "JohnRogersGroup"                       /**< Manufacturer. Will be passed to Device Information Service. */
 #define APP_ADV_INTERVAL                 400                                         /**< The advertising interval (in units of 0.625 ms. This value corresponds to 187.5 ms). */
 #define APP_ADV_TIMEOUT_IN_SECONDS       60                                         /**< The advertising timeout in units of seconds. */

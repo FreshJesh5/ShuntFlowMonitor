@@ -326,12 +326,6 @@ public abstract class BleProfileService extends Service implements BleManagerCal
 		// no need for disconnecting, it will be disconnected by the manager automatically
 	}
 
-	@Override
-	public void onBatteryValueReceived(final int value) {
-		final Intent broadcast = new Intent(BROADCAST_BATTERY_LEVEL);
-		broadcast.putExtra(EXTRA_BATTERY_LEVEL, value);
-		LocalBroadcastManager.getInstance(this).sendBroadcast(broadcast);
-	}
 
 	@Override
 	public void onBondingRequired() {

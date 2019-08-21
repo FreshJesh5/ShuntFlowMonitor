@@ -64,14 +64,6 @@ public interface BleManagerCallbacks {
 	public void onDeviceReady();
 
 	/**
-	 * Called when battery value has been received from the device.
-	 *
-	 * @param value
-	 *            the battery value in percent
-	 */
-	public void onBatteryValueReceived(final int value);
-
-	/**
 	 * Called when an {@link BluetoothGatt#GATT_INSUFFICIENT_AUTHENTICATION} error occurred and the device bond state is NOT_BONDED
 	 */
 	public void onBondingRequired();

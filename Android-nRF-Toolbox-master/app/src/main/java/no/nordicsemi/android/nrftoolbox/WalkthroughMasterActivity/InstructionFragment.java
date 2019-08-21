@@ -4,10 +4,15 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import no.nordicsemi.android.nrftoolbox.MainActivity;
 import no.nordicsemi.android.nrftoolbox.R;
@@ -25,6 +30,7 @@ import no.nordicsemi.android.nrftoolbox.R;
 public class InstructionFragment extends Fragment {
     private String title;
     private int page;
+    TextView yellow_orientation;
 
     private InstructionFragment.OnFragmentInteractionListener mListener;
     public InstructionFragment() {
@@ -68,9 +74,53 @@ public class InstructionFragment extends Fragment {
                 //and ALSO start the timer
                 //model.doAction();
                 ((WalkthroughMasterActivity)getActivity()).setVpPager(1);
-                ((WalkthroughMasterActivity)getActivity()).startTheTimer();
+                ((WalkthroughMasterActivity)getActivity()).startTheTimerOne(); //the 1 means start the 1st timer(or the one in timerFragment)
             }
         });
+        final Spinner myspin_one = view.findViewById(R.id.instruction_spinner_one);
+        ArrayAdapter<CharSequence> adapter_one = ArrayAdapter.createFromResource(getActivity(), R.array.instruction_upstream_downstream, android.R.layout.simple_spinner_item);
+        adapter_one.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        myspin_one.setAdapter(adapter_one);
+
+
+        final Spinner myspin_two = view.findViewById(R.id.instruction_spinner_two);
+        ArrayAdapter<CharSequence> adapter_two = ArrayAdapter.createFromResource(getActivity(), R.array.instruction_upstream_downstream, android.R.layout.simple_spinner_item);
+        adapter_two.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        myspin_two.setAdapter(adapter_two);
+
+        myspin_one.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                if (position == 0) {
+                    ((WalkthroughMasterActivity) getActivity()).setYellow_upstream_flag(false);
+                    myspin_two.setSelection(1);
+                }
+                else if (position == 1) {
+                    ((WalkthroughMasterActivity) getActivity()).setYellow_upstream_flag(true);
+                    myspin_two.setSelection(0);
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {}
+        });
+
+        myspin_two.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                if (position == 0) {
+                    ((WalkthroughMasterActivity) getActivity()).setYellow_upstream_flag(false);
+                    myspin_one.setSelection(1);
+                }
+                else if (position == 1) {
+                    ((WalkthroughMasterActivity) getActivity()).setYellow_upstream_flag(true);
+                    myspin_one.setSelection(0);
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {}
+        });
+
         return view;
     }
 

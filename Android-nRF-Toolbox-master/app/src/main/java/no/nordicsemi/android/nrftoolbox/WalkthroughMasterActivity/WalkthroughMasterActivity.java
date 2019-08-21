@@ -1,5 +1,6 @@
 package no.nordicsemi.android.nrftoolbox.WalkthroughMasterActivity;
 
+import android.content.Context;
 import android.net.Uri;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -8,16 +9,21 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.ViewGroup;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.Scroller;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import org.achartengine.GraphicalView;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -29,6 +35,7 @@ import no.nordicsemi.android.nrftoolbox.WalkthroughMasterActivity.WalkthroughMas
 import no.nordicsemi.android.nrftoolbox.nfc_ble_hybrid.log;
 import no.nordicsemi.android.nrftoolbox.profile.BleManager;
 import no.nordicsemi.android.nrftoolbox.profile.BleProfileActivity;
+import no.nordicsemi.android.nrftoolbox.widget.NonSwipeableViewPager;
 
 public class WalkthroughMasterActivity extends BleProfileActivity
         implements TimerFragment.OnFragmentInteractionListener,
@@ -37,7 +44,7 @@ public class WalkthroughMasterActivity extends BleProfileActivity
                     WalkthroughMaster_ManagerCallback{
 
     private MyPagerAdapter pagerAdapter;
-    private ViewPager vpPager;
+    private NonSwipeableViewPager vpPager;
 
     private final String TAG = "WT_MAIN_Activity";
 
@@ -50,6 +57,20 @@ public class WalkthroughMasterActivity extends BleProfileActivity
     private double[] batteryarray = new double[50];
     private int batcount = 0;
 
+    private boolean first_val_flag = true;
+    private boolean yellow_upstream_flag = false;
+    public void setYellow_upstream_flag(boolean mBool) {
+        yellow_upstream_flag = mBool;
+    }
+    public boolean getYellow_upstream_flag() {return yellow_upstream_flag;}
+    public int firstGreenVal;
+    public int firstYellowVal;
+    public int lastGreenVal;
+    public int lastYellowVal;
+    public int currx;
+    public int curry;
+    public int currz;
+    public int curra;
     private no.nordicsemi.android.nrftoolbox.nfc_ble_hybrid.log datalog = new log();
 
     private Switch log;
@@ -59,9 +80,6 @@ public class WalkthroughMasterActivity extends BleProfileActivity
     private WalkthroughMaster_Manager manager;
 
     private final static int REFRESH_INTERVAL = 100;//1 second interval
-    //	private short axis = 0;
-
-
     private Handler mHandler = new Handler();
 
     private boolean isGraphInProgress = false;
@@ -116,6 +134,11 @@ public class WalkthroughMasterActivity extends BleProfileActivity
         */
     }
 
+    @Override
+    public void onBackPressed() {
+        onDeviceDisconnected();
+        finish();
+    }
 
     protected void onResume() {
         super.onResume();
@@ -163,22 +186,6 @@ public class WalkthroughMasterActivity extends BleProfileActivity
         stopShowGraph();
     }
 
-    /*
-        @Override
-        protected int getLoggerProfileTitle() {
-            return R.string.hrs_feature_title;
-        }
-
-        @Override
-        protected int getAboutTextId() {
-            return R.string.hrs_about_text;
-        }
-
-        @Override
-        protected int getDefaultDeviceName() {
-            return R.string.hrs_default_name;
-        }
-    */
     @Override
     protected UUID getFilterUUID() {
         return WalkthroughMaster_Manager.HR_SERVICE_UUID;
@@ -189,18 +196,6 @@ public class WalkthroughMasterActivity extends BleProfileActivity
     protected int getLoggerProfileTitle() {
         return R.string.hrs_feature_title;
     }
-
-    @Override
-    protected int getAboutTextId() {
-        return R.string.hrs_about_text;
-    }
-
-    @Override
-    protected int getDefaultDeviceName() {
-        return R.string.hrs_default_name;
-    }
-
-
 
     void updateGraph(int[] x,int[] y, int[] z, int[] a) {
 
@@ -310,9 +305,26 @@ public class WalkthroughMasterActivity extends BleProfileActivity
 
     @Override
     public void onHRValueReceived(int[] x,int[] y, int[] z, int[] a,int[] b) {
-        //updateGraph(x,y,z,a);
-        //updateBattery(b[0]);
+        if (first_val_flag == true) {
+            first_val_flag = false;
+            //store the first values advertised
+            //WHEN THE BACK BUTTON IS PRESSED WHILE CONNECTED, THIS STILL RUNS, AND CAUSES THE APP TO CRASH
+            ContactTestFragment mFrag =  (ContactTestFragment) pagerAdapter.getItem(2);
+            mFrag.myTimer.start();
+            mFrag.storeFirstAdValues(x,y,z,a);
+        }
+        //store values as global variables so they can be accessed by contact test fragment methods
+        currx = x[0];
+        curry = y[0];
+        currz = z[0];
+        curra = a[0];
+//THIS TOO KEEPS GETTING RUN INSTEAD OF DISCONNECTING
         datalog.appendLog(x,y,z,a,b);
+    }
+
+    public void storeLastAdValues(int[] x,int[] y, int[] z, int[] a) {
+        lastGreenVal = x[1];
+        lastYellowVal = z[1];
     }
 
     @Override
@@ -346,7 +358,7 @@ public class WalkthroughMasterActivity extends BleProfileActivity
     }
 
     public void setupViewPager() {
-        vpPager = (ViewPager) findViewById(R.id.vpPager);
+        vpPager = (NonSwipeableViewPager) findViewById(R.id.vpPager);
         pagerAdapter = new MyPagerAdapter(getSupportFragmentManager());
         pagerAdapter.addFragment(InstructionFragment.newInstance(0,"page #1"));
         pagerAdapter.addFragment(TimerFragment.newInstance(1,"Page #2"));
@@ -359,7 +371,7 @@ public class WalkthroughMasterActivity extends BleProfileActivity
         vpPager.setCurrentItem(i);
     }
 
-    public void startTheTimer() {
+    public void startTheTimerOne() {
         TimerFragment timerFragment = (TimerFragment)pagerAdapter.getItem(1);
         timerFragment.myTimer.start();
     }
@@ -373,6 +385,7 @@ public class WalkthroughMasterActivity extends BleProfileActivity
     public void onFragmentInteraction(Uri uri){
         //Leave Empty
     }
+
 
     public static class MyPagerAdapter extends FragmentStatePagerAdapter {
         private static int NUM_ITEMS = 3;
@@ -396,6 +409,5 @@ public class WalkthroughMasterActivity extends BleProfileActivity
         }
 
     }
-
 
 }

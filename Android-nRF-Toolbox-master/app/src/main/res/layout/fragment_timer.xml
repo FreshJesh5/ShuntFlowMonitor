@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:text="Connect"
+            android:text="Next"
             android:layout_margin="20dp" />
         <!--android:onClick="onClickTimerButton" -->
         <TextView

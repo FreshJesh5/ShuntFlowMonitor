@@ -3,11 +3,14 @@ package no.nordicsemi.android.nrftoolbox.WalkthroughMasterActivity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import no.nordicsemi.android.nrftoolbox.R;
 
@@ -31,11 +34,10 @@ public class ContactTestFragment extends Fragment {
 
     //Values to be used for the contact test. The first Red Val and Blue Val are the first values
     //advertised, and the last two are the final two values advertised in the two minute window.
-    public Boolean isRedUpstream=false;
-    public int firstRedVal;
-    public int firstBlueVal;
-    public int lastRedVal;
-    public int lastBlueVal;
+    public int firstYellowVal;
+    public int firstGreenVal;
+    public int lastYellowVal;
+    public int lastGreenVal;
 
     private OnFragmentInteractionListener mListener;
 
@@ -84,28 +86,83 @@ public class ContactTestFragment extends Fragment {
         ((WalkthroughMasterActivity)getActivity()).findFragmentConnectButton((Button) getView().findViewById(R.id.whywontyouwork));
     }
 
-    public void doContactTest(String isredupstream) {
-        //mParam1 should be isredupstream hopefully, or maybe not
+    public void storeFirstAdValues(int[] x,int[] y, int[] z, int[] a) {
+        //assign firstGreenVal and firstYellowVal the first advertised values ***DEPENDS ON UPSTREAM/DOWNSTREAM
+        firstGreenVal = x[1];
+        firstYellowVal = z[1];
+        TextView mview = getView().findViewById(R.id.mygreenval);
+        mview.setText("" + firstGreenVal);   //bottom value in table
+        mview = getView().findViewById(R.id.myyellowval);
+        mview.setText("" + firstYellowVal);  //top value in table
+    }
+    public void storeLastAdValues(int[] x,int[] y, int[] z, int[] a) {
+        //assign firstGreenVal and firstYellowVal the first advertised values ***DEPENDS ON UPSTREAM/DOWNSTREAM
+        lastGreenVal = x[1];
+        lastYellowVal = z[1];
+        TextView mview = getView().findViewById(R.id.my_sec_greenval);
+        mview.setText("" + lastGreenVal);   //bottom value in table
+        mview = getView().findViewById(R.id.my_sec_yellow_val);
+        mview.setText("" + lastYellowVal);  //top value in table
+    }
+
+    public void doContactTest(Boolean yellow_upstream_flag) {
         //first test if delta temperature for both sensors is less than 2 degrees
-        if (.0035*Math.abs(lastBlueVal-firstBlueVal) > 2 || .0035*Math.abs(lastRedVal-firstRedVal) > 2) {
+        if (.0035*Math.abs(lastGreenVal - firstGreenVal) > 2 || .0035*Math.abs(lastYellowVal - firstYellowVal) > 2) {
             onTestFailed();
         }
         //second test to see if the downstream temperature is higher than the upstream temperature
-        if (isRedUpstream) {
-            if (lastRedVal > lastBlueVal || firstRedVal > firstBlueVal) {
+        if (yellow_upstream_flag) {
+            if (lastYellowVal > lastGreenVal || firstYellowVal > firstGreenVal) {
                 onTestFailed();
             }
         }
         else {
-            if (lastRedVal < lastBlueVal || firstRedVal < firstBlueVal) {
+            if (lastYellowVal < lastGreenVal || firstYellowVal < firstGreenVal) {
                 onTestFailed();
             }
         }
         //Now all the tests our complete, and we can move the user onto the measurement process
+        TextView mview = getView().findViewById(R.id.no_fail);
+        mview.setText("NO FAIL");
     }
     public void onTestFailed() {
+        TextView mview = getView().findViewById(R.id.no_fail);
+        mview.setText("FAILED ONE OF THE TESTS");
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                //wait 2 seconds and go back to the beginning of the walkthrough to start over
+                ((WalkthroughMasterActivity) getActivity()).setVpPager(0);
+            }
+        }, 2000);
 
     }
+
+    public CountDownTimer myTimer = new CountDownTimer(10000,1000) {//cDI is 120000
+
+        private TextView tv;
+         int[] adv_vals = new int[4];
+
+        //Creates the display used by the clock and updates it along with the progress bar every second
+        public void onTick(long millisUntilFinished) {
+
+        }
+        //Tells the system what to do once the timer is finished
+        public void onFinish() {
+            //public void storeLastAdValues(int[] x,int[] y, int[] z, int[] a) {
+                //assign firstGreenVal and firstYellowVal the first advertised values ***DEPENDS ON UPSTREAM/DOWNSTREAM
+            WalkthroughMasterActivity myact = ((WalkthroughMasterActivity)getActivity());
+                lastGreenVal = myact.currx;
+                lastYellowVal = myact.currz;
+                Boolean upflag = myact.getYellow_upstream_flag();
+                TextView mview = getView().findViewById(R.id.my_sec_greenval);
+                mview.setText("" + lastGreenVal);   //bottom value in table
+                mview = getView().findViewById(R.id.my_sec_yellow_val);
+                mview.setText("" + lastYellowVal);  //top value in table
+            doContactTest(upflag);
+            //}
+        }
+    };
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {

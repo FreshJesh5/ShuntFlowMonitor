@@ -34,7 +34,6 @@ public class WalkthroughMaster_Manager extends BleManager<WalkthroughMaster_Mana
     private int[] z = new int[2];
     private int[] a = new int[2];
     private int[] b = new int[2];
-    private int[] vdd = new int[2];
     /*
         public final static UUID UART_SERVICE_UUID = UUID.fromString("0000180D-0000-1000-8000-00805f9b34fb");
         private static final UUID UART_TX_CHARACTERISTIC_UUID = UUID.fromString("00002A40-0000-1000-8000-00805f9b34fb");
