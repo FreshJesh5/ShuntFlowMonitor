@@ -8,3 +8,6 @@ git update-index --skip-worktree Android-nRF-Toolbox-master/.idea/caches/*
 
 To check for skipped files/directories:
 git ls-files -v | grep ^S
+
+To undo skip-worktree:
+git update-index --no-skip-worktree

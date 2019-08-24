@@ -42,35 +42,36 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
             android:src="@drawable/rhaeoslogo"/>
 
         <Button
             android:id="@+id/MainActivityButtonOne"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="261dp"
+            android:layout_above="@+id/MainActivityButtonTwo"
+            android:layout_marginBottom="35dp"
             android:onClick="beginHybridActivity"
             android:text="Clinical Mode" />
 
-   <!-- style="@style/Widget.Connect" -->
+        <!-- style="@style/Widget.Connect" -->
 
         <Button
-            android:layout_width="wrap_content"
+            android:id="@+id/MainActivityButtonTwo"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="411dp"
             android:onClick="beginWalkthroughActivity"
             android:text="Walkthrough Mode" />
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/MainActivityButtonTwo"
+            android:layout_marginTop="35dp"
             android:layout_centerHorizontal="true"
             android:onClick="beginUploadDataActivity"
-            android:layout_marginBottom="150dp"
             android:text="Upload Data" />
 
     </no.nordicsemi.android.nrftoolbox.widget.ForegroundRelativeLayout>
