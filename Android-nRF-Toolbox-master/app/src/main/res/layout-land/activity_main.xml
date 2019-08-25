@@ -40,12 +40,8 @@
             />
 -->
         <ImageView
-            android:layout_alignParentTop="true"
-            android:id="@+id/cbielogo"
             android:layout_width="match_parent"
-
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
             android:src="@drawable/rhaeoslogo"/>
 
         <Button
@@ -54,11 +50,11 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_above="@+id/MainActivityButtonTwo"
-            android:layout_marginBottom="35dp"
+            android:layout_marginBottom="15dp"
             android:onClick="beginHybridActivity"
             android:text="Clinical Mode" />
 
-        <!-- style="@style/Widget.Connect" -->
+   <!-- style="@style/Widget.Connect" -->
 
         <Button
             android:id="@+id/MainActivityButtonTwo"
@@ -72,7 +68,7 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/MainActivityButtonTwo"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="15dp"
             android:layout_centerHorizontal="true"
             android:onClick="beginUploadDataActivity"
             android:text="Upload Data" />
