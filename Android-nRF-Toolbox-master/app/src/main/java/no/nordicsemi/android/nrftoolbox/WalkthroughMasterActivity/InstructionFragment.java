@@ -33,9 +33,6 @@ public class InstructionFragment extends Fragment {
     TextView yellow_orientation;
 
     private InstructionFragment.OnFragmentInteractionListener mListener;
-    public InstructionFragment() {
-        // Required empty public constructor
-    }
 
     /**
      * Use this factory method to create a new instance of
@@ -125,11 +122,6 @@ public class InstructionFragment extends Fragment {
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-    public void ononClickWalkthroughButton(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
 
     @Override
     public void onAttach(Context context) {

@@ -4,30 +4,15 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.util.AttributeSet;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.ViewGroup;
-import android.view.animation.DecelerateInterpolator;
-import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.Scroller;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import org.achartengine.GraphicalView;
-
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
 import no.nordicsemi.android.nrftoolbox.R;
 import no.nordicsemi.android.nrftoolbox.nfc_ble_hybrid.LineGraphView;
 import no.nordicsemi.android.nrftoolbox.WalkthroughMasterActivity.WalkthroughMaster_Manager;
@@ -35,6 +20,7 @@ import no.nordicsemi.android.nrftoolbox.WalkthroughMasterActivity.WalkthroughMas
 import no.nordicsemi.android.nrftoolbox.nfc_ble_hybrid.log;
 import no.nordicsemi.android.nrftoolbox.profile.BleManager;
 import no.nordicsemi.android.nrftoolbox.profile.BleProfileActivity;
+import no.nordicsemi.android.nrftoolbox.widget.MyPagerAdapter;
 import no.nordicsemi.android.nrftoolbox.widget.NonSwipeableViewPager;
 
 public class WalkthroughMasterActivity extends BleProfileActivity
@@ -63,10 +49,6 @@ public class WalkthroughMasterActivity extends BleProfileActivity
         yellow_upstream_flag = mBool;
     }
     public boolean getYellow_upstream_flag() {return yellow_upstream_flag;}
-    public int firstGreenVal;
-    public int firstYellowVal;
-    public int lastGreenVal;
-    public int lastYellowVal;
     public int currx;
     public int curry;
     public int currz;
@@ -133,6 +115,7 @@ public class WalkthroughMasterActivity extends BleProfileActivity
         });
         */
     }
+
 
     @Override
     public void onBackPressed() {
@@ -308,7 +291,6 @@ public class WalkthroughMasterActivity extends BleProfileActivity
         if (first_val_flag == true) {
             first_val_flag = false;
             //store the first values advertised
-            //WHEN THE BACK BUTTON IS PRESSED WHILE CONNECTED, THIS STILL RUNS, AND CAUSES THE APP TO CRASH
             ContactTestFragment mFrag =  (ContactTestFragment) pagerAdapter.getItem(2);
             mFrag.myTimer.start();
             mFrag.storeFirstAdValues(x,y,z,a);
@@ -318,13 +300,7 @@ public class WalkthroughMasterActivity extends BleProfileActivity
         curry = y[0];
         currz = z[0];
         curra = a[0];
-//THIS TOO KEEPS GETTING RUN INSTEAD OF DISCONNECTING
         datalog.appendLog(x,y,z,a,b);
-    }
-
-    public void storeLastAdValues(int[] x,int[] y, int[] z, int[] a) {
-        lastGreenVal = x[1];
-        lastYellowVal = z[1];
     }
 
     @Override
@@ -358,7 +334,7 @@ public class WalkthroughMasterActivity extends BleProfileActivity
     }
 
     public void setupViewPager() {
-        vpPager = (NonSwipeableViewPager) findViewById(R.id.vpPager);
+        vpPager = findViewById(R.id.vpPager);
         pagerAdapter = new MyPagerAdapter(getSupportFragmentManager());
         pagerAdapter.addFragment(InstructionFragment.newInstance(0,"page #1"));
         pagerAdapter.addFragment(TimerFragment.newInstance(1,"Page #2"));
@@ -366,7 +342,7 @@ public class WalkthroughMasterActivity extends BleProfileActivity
         vpPager.setAdapter(pagerAdapter);
     }
 
-    //gets called when the next button is pressed
+    //method used to move onto whatever desired fragment
     public void setVpPager(int i) {
         vpPager.setCurrentItem(i);
     }
@@ -377,6 +353,15 @@ public class WalkthroughMasterActivity extends BleProfileActivity
     }
 
     public boolean onOptionsItemSelected(MenuItem item){
+/*
+        if (vpPager.getCurrentItem()==2)
+        {
+            //HERE CHECK IF DEVICE IS CONNECTED, AND IF SO, DISCONNECT
+            if (isDeviceConnected()) {
+                disconnectDevice();
+            }
+        }
+        */
         finish();
         return true;
     }
@@ -384,30 +369,6 @@ public class WalkthroughMasterActivity extends BleProfileActivity
     @Override
     public void onFragmentInteraction(Uri uri){
         //Leave Empty
-    }
-
-
-    public static class MyPagerAdapter extends FragmentStatePagerAdapter {
-        private static int NUM_ITEMS = 3;
-        private final List<Fragment> mFragmentList = new ArrayList<>();
-
-        public MyPagerAdapter(FragmentManager fragmentManager) {
-            super(fragmentManager);
-        }
-        public void addFragment(Fragment fragment) {
-            mFragmentList.add(fragment);
-        }
-        @Override
-        public Fragment getItem(int position) {
-            return mFragmentList.get(position);
-        }
-
-        // Returns total number of pages
-        @Override
-        public int getCount() {
-            return NUM_ITEMS;
-        }
-
     }
 
 }

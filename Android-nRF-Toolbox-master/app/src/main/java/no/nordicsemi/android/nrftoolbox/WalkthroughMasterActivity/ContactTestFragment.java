@@ -79,7 +79,7 @@ public class ContactTestFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_contact_test, container, false);
     }
 
-    //find button for BleProfileActivity
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view,savedInstanceState);
@@ -95,46 +95,47 @@ public class ContactTestFragment extends Fragment {
         mview = getView().findViewById(R.id.myyellowval);
         mview.setText("" + firstYellowVal);  //top value in table
     }
-    public void storeLastAdValues(int[] x,int[] y, int[] z, int[] a) {
-        //assign firstGreenVal and firstYellowVal the first advertised values ***DEPENDS ON UPSTREAM/DOWNSTREAM
-        lastGreenVal = x[1];
-        lastYellowVal = z[1];
-        TextView mview = getView().findViewById(R.id.my_sec_greenval);
-        mview.setText("" + lastGreenVal);   //bottom value in table
-        mview = getView().findViewById(R.id.my_sec_yellow_val);
-        mview.setText("" + lastYellowVal);  //top value in table
-    }
 
     public void doContactTest(Boolean yellow_upstream_flag) {
+        String mstring;
         //first test if delta temperature for both sensors is less than 2 degrees
         if (.0035*Math.abs(lastGreenVal - firstGreenVal) > 2 || .0035*Math.abs(lastYellowVal - firstYellowVal) > 2) {
-            onTestFailed();
+            mstring = "Delta Temperature is more than 2 degrees";
+            onTestFailed(mstring);
+            return;
         }
         //second test to see if the downstream temperature is higher than the upstream temperature
         if (yellow_upstream_flag) {
             if (lastYellowVal > lastGreenVal || firstYellowVal > firstGreenVal) {
-                onTestFailed();
+                mstring = "Upstream Temp is higher than Downstream temp";
+                onTestFailed(mstring);
+                return;
             }
         }
         else {
             if (lastYellowVal < lastGreenVal || firstYellowVal < firstGreenVal) {
-                onTestFailed();
+                mstring = "Upstream Temp is higher than Downstream temp";
+                onTestFailed(mstring);
+                return;
             }
         }
         //Now all the tests our complete, and we can move the user onto the measurement process
         TextView mview = getView().findViewById(R.id.no_fail);
         mview.setText("NO FAIL");
     }
-    public void onTestFailed() {
+
+    //Disconnect from the device here
+    public void onTestFailed(String mstring) {
         TextView mview = getView().findViewById(R.id.no_fail);
-        mview.setText("FAILED ONE OF THE TESTS");
+        mview.setText("Error:"+mstring);
         Handler handler = new Handler();
+        ((WalkthroughMasterActivity)getActivity()).disconnectDevice();
         handler.postDelayed(new Runnable() {
             public void run() {
                 //wait 2 seconds and go back to the beginning of the walkthrough to start over
                 ((WalkthroughMasterActivity) getActivity()).setVpPager(0);
             }
-        }, 2000);
+        }, 5000);
 
     }
 
@@ -185,6 +186,10 @@ public class ContactTestFragment extends Fragment {
 
     @Override
     public void onDetach() {
+        //Fixes bug where timer still exists after back button is pressed, causing the app to crash
+        ((WalkthroughMasterActivity)getActivity()).disconnectDevice();
+        //((WalkthroughMasterActivity)getActivity()).onDeviceDisconnected();
+        myTimer.cancel();
         super.onDetach();
         mListener = null;
     }

@@ -26,9 +26,11 @@ public class TimerFragment extends Fragment {
     private Button timerButton;
 
     private ProgressBar mProgressBar;
+    private TextView clock;
+    private TextView prog_percent;
+    private TextView stableText;
     CountDownTimer myTimer = new CountDownTimer(10000,1000) {//cDI is 120000
 
-        private TextView tv;
         //Creates the display used by the clock and updates it along with the progress bar every second
         public void onTick(long millisUntilFinished) {
             //  sets the progress bar progress to millisUntilFinished/1000
@@ -51,21 +53,17 @@ public class TimerFragment extends Fragment {
             mProgressBar.setProgress(120 - myInt);
             percent = 100 - Math.round(100*myInt/120);
             sPercent = percent + "%";
-            tv = (TextView) getView().findViewById(R.id.clock);
-            tv.setText(Timer);
-            tv = (TextView) getView().findViewById(R.id.prog_percent);
-            tv.setText(sPercent);
+            clock.setText(Timer);
+            prog_percent.setText(sPercent);
         }
         //Tells the system what to do once the timer is finished
         public void onFinish() {
             timerButton.setVisibility(View.VISIBLE);
+            stableText.setText("Device is Now Stable");
         }
     };
 
     private TimerFragment.OnFragmentInteractionListener mListener;
-    public TimerFragment() {
-        // Required empty public constructor
-    }
 
     public static TimerFragment newInstance(int page, String title) {
         TimerFragment fragmentSecond = new TimerFragment();
@@ -81,7 +79,6 @@ public class TimerFragment extends Fragment {
         super.onCreate(savedInstanceState);
         page = getArguments().getInt("someInt", 0);
         title = getArguments().getString("someTitle");
-        //model = ViewModelProviders.of(getActivity()).get(WalkthroughMasterActivity.UserModel.class);
     }
 
     @Override
@@ -89,11 +86,15 @@ public class TimerFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_timer, container, false);
         mProgressBar = (ProgressBar) view.findViewById(R.id.timerProgressBar);
+        prog_percent = view.findViewById(R.id.prog_percent);
+        clock = view.findViewById(R.id.clock);
+        stableText = view.findViewById(R.id.stableText);
         timerButton =  view.findViewById(R.id.timerButton);
         timerButton.setVisibility(View.INVISIBLE);
         timerButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //do something when the timer button is pressed, like move onto the next fragment(Contact Test)
+                //move onto the next fragment(Contact Test) and reset all texts that are not immediately set
+                stableText.setText("Device is now Stabilizing...");
                 ((WalkthroughMasterActivity) getActivity()).setVpPager(2);
             }
         });

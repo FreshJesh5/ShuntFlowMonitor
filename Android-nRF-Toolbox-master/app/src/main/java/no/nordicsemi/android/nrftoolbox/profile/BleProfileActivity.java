@@ -110,6 +110,9 @@ public abstract class BleProfileActivity extends AppCompatActivity implements Bl
 		}
 	}
 
+	public void disconnectDevice() {
+		mBleManager.disconnect();
+	}
 	/**
 	 * You may do some initialization here. This method is called from {@link #onCreate(Bundle)} before the view was created.
 	 */
