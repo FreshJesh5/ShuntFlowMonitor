@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".nfc_ble_hybrid.NFC_BLE_HYBRID_Activity" >
+
+
+    <include layout="@layout/toolbar"
+        android:id="@+id/toolbar_actionbar"/>
+
+    <no.nordicsemi.android.nrftoolbox.widget.ForegroundRelativeLayout
+        style="@style/HeaderShadow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/background_image1"
+        android:backgroundTintMode="screen"
+        android:backgroundTint="@android:color/holo_blue_dark"
+        >
+
+        <FrameLayout
+            android:id="@+id/graph_temp2"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="70dp"
+            android:layout_height="500dp"
+            android:layout_width = "match_parent"
+            android:layout_below="@+id/device_name2"
+            android:layout_above="@id/action_connect"></FrameLayout>
+        <TextView
+            android:id="@+id/mybattery2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/battery"
+            android:gravity="center"
+            android:text="n/a"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@android:color/white"
+            android:layout_margin="20dp"/>
+        <Button
+            android:id="@+id/finish_graph"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:onClick="onConnectClicked"
+            android:text="@string/action_connect"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
+        <Switch
+            android:id="@+id/switch2"
+            android:layout_width="87dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="LOG"
+            android:textColor="@android:color/black" />
+    </no.nordicsemi.android.nrftoolbox.widget.ForegroundRelativeLayout>
+</LinearLayout>
+

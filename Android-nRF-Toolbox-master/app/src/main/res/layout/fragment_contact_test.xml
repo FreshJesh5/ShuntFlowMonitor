@@ -66,16 +66,16 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Yellow Values"
+                    android:text="Green Values"
                     android:gravity="center"/>
                 <TextView
-                    android:id="@+id/myyellowval"
+                    android:id="@+id/mygreenval"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="no"
                     android:gravity="center"/>
                 <TextView
-                    android:id="@+id/my_sec_yellow_val"
+                    android:id="@+id/my_sec_greenval"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="no"
@@ -86,10 +86,10 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Green Values"
+                    android:text="Yellow Values"
                     android:gravity="center"/>
                 <TextView
-                    android:id="@+id/mygreenval"
+                    android:id="@+id/myyellowval"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_toLeftOf="@id/instruction_spinner_one"
@@ -97,7 +97,7 @@
                     android:layout_centerVertical="true"
                     android:gravity="center"/>
                 <TextView
-                    android:id="@+id/my_sec_greenval"
+                    android:id="@+id/my_sec_yellow_val"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="no"

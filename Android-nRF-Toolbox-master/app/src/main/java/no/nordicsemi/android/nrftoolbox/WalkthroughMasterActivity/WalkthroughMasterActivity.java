@@ -27,6 +27,7 @@ public class WalkthroughMasterActivity extends BleProfileActivity
         implements TimerFragment.OnFragmentInteractionListener,
                    InstructionFragment.OnFragmentInteractionListener,
                     ContactTestFragment.OnFragmentInteractionListener,
+                    Graph_Data.OnFragmentInteractionListener,
                     WalkthroughMaster_ManagerCallback{
 
     private MyPagerAdapter pagerAdapter;
@@ -138,7 +139,7 @@ public class WalkthroughMasterActivity extends BleProfileActivity
 
     private void showGraph() {
         mGraphView = mLineGraph.getView(this);
-        ViewGroup layout = (ViewGroup) findViewById(R.id.graph_temp1);
+        ViewGroup layout = (ViewGroup) findViewById(R.id.graph_temp2);  //HERE
         layout.addView(mGraphView);
     }
 
@@ -219,7 +220,7 @@ public class WalkthroughMasterActivity extends BleProfileActivity
                 avg=0;
             else if(avg>100)
                 avg=100;
-            TextView battery = (TextView) findViewById(R.id.mybattery);
+            TextView battery = (TextView) findViewById(R.id.mybattery2);  //HERE
             String percent = Double.toString(avg);
             int period = percent.indexOf(".");
             percent = percent.substring(0,period);
@@ -339,6 +340,7 @@ public class WalkthroughMasterActivity extends BleProfileActivity
         pagerAdapter.addFragment(InstructionFragment.newInstance(0,"page #1"));
         pagerAdapter.addFragment(TimerFragment.newInstance(1,"Page #2"));
         pagerAdapter.addFragment(ContactTestFragment.newInstance("2","page #3"));
+        pagerAdapter.addFragment(Graph_Data.newInstance("3","page #4"));
         vpPager.setAdapter(pagerAdapter);
     }
 

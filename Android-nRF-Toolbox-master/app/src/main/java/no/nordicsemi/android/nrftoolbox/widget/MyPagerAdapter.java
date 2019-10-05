@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MyPagerAdapter extends FragmentStatePagerAdapter {
-    private static int NUM_ITEMS = 3;
+    private static int NUM_ITEMS = 4;
     private final List<Fragment> mFragmentList = new ArrayList<>();
 
     public MyPagerAdapter(FragmentManager fragmentManager) {

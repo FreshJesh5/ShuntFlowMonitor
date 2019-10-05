@@ -106,11 +106,11 @@ public class InstructionFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 if (position == 0) {
-                    ((WalkthroughMasterActivity) getActivity()).setYellow_upstream_flag(false);
+                    ((WalkthroughMasterActivity) getActivity()).setYellow_upstream_flag(true);
                     myspin_one.setSelection(1);
                 }
                 else if (position == 1) {
-                    ((WalkthroughMasterActivity) getActivity()).setYellow_upstream_flag(true);
+                    ((WalkthroughMasterActivity) getActivity()).setYellow_upstream_flag(false);
                     myspin_one.setSelection(0);
                 }
             }

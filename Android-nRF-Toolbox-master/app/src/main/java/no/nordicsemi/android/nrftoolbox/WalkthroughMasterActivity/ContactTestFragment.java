@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import no.nordicsemi.android.nrftoolbox.R;
 
@@ -98,13 +99,7 @@ public class ContactTestFragment extends Fragment {
 
     public void doContactTest(Boolean yellow_upstream_flag) {
         String mstring;
-        //first test if delta temperature for both sensors is less than 2 degrees
-        if (.0035*Math.abs(lastGreenVal - firstGreenVal) > 2 || .0035*Math.abs(lastYellowVal - firstYellowVal) > 2) {
-            mstring = "Delta Temperature is more than 2 degrees";
-            onTestFailed(mstring);
-            return;
-        }
-        //second test to see if the downstream temperature is higher than the upstream temperature
+        //first test to see if the downstream temperature is higher than the upstream temperature
         if (yellow_upstream_flag) {
             if (lastYellowVal > lastGreenVal || firstYellowVal > firstGreenVal) {
                 mstring = "Upstream Temp is higher than Downstream temp";
@@ -119,23 +114,44 @@ public class ContactTestFragment extends Fragment {
                 return;
             }
         }
-        //Now all the tests our complete, and we can move the user onto the measurement process
-        TextView mview = getView().findViewById(R.id.no_fail);
-        mview.setText("NO FAIL");
+        //second test if delta temperature for both sensors is less than 2 degrees
+        if (.0035*Math.abs(lastGreenVal - firstGreenVal) > 2 || .0035*Math.abs(lastYellowVal - firstYellowVal) > 2) {
+            mstring = "Delta Temperature is more than 2 degrees";
+            onTestFailed(mstring);
+            return;
+        }
+        else {
+            //Now all the tests our complete, and we can move the user onto the measurement process
+            onTestSuccess();
+        }
+    }
+
+    public void onTestSuccess() {
+       // TextView mview = getView().findViewById(R.id.no_fail);
+       // mview.setText("NO FAIL");
+       // Handler handler = new Handler();
+       // handler.postDelayed(new Runnable() {
+       //     public void run() {
+                //wait 2 seconds and go onto the next step
+                ((WalkthroughMasterActivity) getActivity()).setVpPager(3);
+      //      }
+     //   }, 3000);
+        Toast.makeText(getActivity().getApplicationContext(),"No Fail Here", Toast.LENGTH_LONG).show();
     }
 
     //Disconnect from the device here
     public void onTestFailed(String mstring) {
-        TextView mview = getView().findViewById(R.id.no_fail);
-        mview.setText("Error:"+mstring);
-        Handler handler = new Handler();
+        //TextView mview = getView().findViewById(R.id.no_fail);
+        //mview.setText("Error:"+mstring);
+        Toast.makeText(getActivity().getApplicationContext(),"Error:"+mstring, Toast.LENGTH_LONG).show();
+        //Handler handler = new Handler();
         ((WalkthroughMasterActivity)getActivity()).disconnectDevice();
-        handler.postDelayed(new Runnable() {
-            public void run() {
+        //handler.postDelayed(new Runnable() {
+        //   public void run() {
                 //wait 2 seconds and go back to the beginning of the walkthrough to start over
                 ((WalkthroughMasterActivity) getActivity()).setVpPager(0);
-            }
-        }, 5000);
+        //    }
+        //}, 5000);
 
     }
 

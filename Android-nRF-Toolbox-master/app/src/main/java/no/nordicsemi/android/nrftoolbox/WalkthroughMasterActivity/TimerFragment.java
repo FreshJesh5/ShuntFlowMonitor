@@ -95,6 +95,7 @@ public class TimerFragment extends Fragment {
             public void onClick(View v) {
                 //move onto the next fragment(Contact Test) and reset all texts that are not immediately set
                 stableText.setText("Device is now Stabilizing...");
+                timerButton.setVisibility(View.INVISIBLE);
                 ((WalkthroughMasterActivity) getActivity()).setVpPager(2);
             }
         });
