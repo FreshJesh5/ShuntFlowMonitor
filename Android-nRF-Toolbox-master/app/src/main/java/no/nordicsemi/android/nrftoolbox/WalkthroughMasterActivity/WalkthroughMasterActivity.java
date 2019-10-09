@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -50,6 +51,8 @@ public class WalkthroughMasterActivity extends BleProfileActivity
         yellow_upstream_flag = mBool;
     }
     public boolean getYellow_upstream_flag() {return yellow_upstream_flag;}
+
+    private boolean graph_data_flag = false;
     public int currx;
     public int curry;
     public int currz;
@@ -129,17 +132,17 @@ public class WalkthroughMasterActivity extends BleProfileActivity
     }
 
 
-    private void setGUI() {
-        log = (Switch) findViewById(R.id.switch1);
-        led = (Switch) findViewById(R.id.led_switch);
+    public void setGUI(View v) {
+        //log = (Switch) findViewById(R.id.switch1);
+        //led = (Switch) findViewById(R.id.led_switch);
         mLineGraph = mLineGraph.getLineGraphView();
-        showGraph();
+        showGraph(v);
     }
 
 
-    private void showGraph() {
+    private void showGraph(View v) {
         mGraphView = mLineGraph.getView(this);
-        ViewGroup layout = (ViewGroup) findViewById(R.id.graph_temp2);  //HERE
+        ViewGroup layout = (ViewGroup) v.findViewById(R.id.graph_temp2);
         layout.addView(mGraphView);
     }
 
@@ -200,6 +203,8 @@ public class WalkthroughMasterActivity extends BleProfileActivity
 //			}
         }
     }
+
+    public void setGraph_data_flag(boolean b) { graph_data_flag = b; }
 
     //added updateBattery function. This function takes the b array filled with advertised
     //battery life data and adds it to the mybattery TextView, which will display it. The
@@ -273,7 +278,7 @@ public class WalkthroughMasterActivity extends BleProfileActivity
 
     @Override
     public void onDeviceReady() {
-        //startShowGraph(); for now
+        startShowGraph();
     }
 
     @Override
@@ -297,11 +302,17 @@ public class WalkthroughMasterActivity extends BleProfileActivity
             mFrag.storeFirstAdValues(x,y,z,a);
         }
         //store values as global variables so they can be accessed by contact test fragment methods
-        currx = x[0];
+        currx = x[0];//TO DO: CHANGE TO PRIVATE AND MAKE A GETTER METHOD
         curry = y[0];
         currz = z[0];
         curra = a[0];
         datalog.appendLog(x,y,z,a,b);
+
+        if(graph_data_flag == true) {
+            updateGraph(x,y,z,a);
+            updateBattery(b[0]);
+        }
+
     }
 
     @Override

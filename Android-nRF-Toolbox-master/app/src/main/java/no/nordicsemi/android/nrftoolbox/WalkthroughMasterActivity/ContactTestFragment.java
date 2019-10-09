@@ -39,6 +39,7 @@ public class ContactTestFragment extends Fragment {
     public int firstGreenVal;
     public int lastYellowVal;
     public int lastGreenVal;
+    private View graph_data_button;
 
     private OnFragmentInteractionListener mListener;
 
@@ -77,6 +78,7 @@ public class ContactTestFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_contact_test, container, false);
     }
 
@@ -85,6 +87,16 @@ public class ContactTestFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view,savedInstanceState);
         ((WalkthroughMasterActivity)getActivity()).findFragmentConnectButton((Button) getView().findViewById(R.id.whywontyouwork));
+        graph_data_button = getView().findViewById(R.id.move_on_from_contact_button);
+        graph_data_button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                //move onto the next fragment(Contact Test) and reset all texts that are not immediately set
+                ((WalkthroughMasterActivity) getActivity()).setVpPager(3);
+                graph_data_button.setVisibility(View.INVISIBLE);
+                ((WalkthroughMasterActivity)getActivity()).setGraph_data_flag(true);
+
+            }
+        });
     }
 
     public void storeFirstAdValues(int[] x,int[] y, int[] z, int[] a) {
@@ -133,10 +145,7 @@ public class ContactTestFragment extends Fragment {
        // handler.postDelayed(new Runnable() {
        //     public void run() {
                 //wait 2 seconds and go onto the next step
-                ((WalkthroughMasterActivity) getActivity()).setVpPager(3);
-      //      }
-     //   }, 3000);
-        Toast.makeText(getActivity().getApplicationContext(),"No Fail Here", Toast.LENGTH_LONG).show();
+                graph_data_button.setVisibility(View.VISIBLE);
     }
 
     //Disconnect from the device here
@@ -155,7 +164,7 @@ public class ContactTestFragment extends Fragment {
 
     }
 
-    public CountDownTimer myTimer = new CountDownTimer(10000,1000) {//cDI is 120000
+    public CountDownTimer myTimer = new CountDownTimer(5000,1000) {//cDI is 120000
 
         private TextView tv;
          int[] adv_vals = new int[4];

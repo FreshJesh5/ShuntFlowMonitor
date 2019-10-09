@@ -65,16 +65,15 @@ public class Graph_Data extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         return inflater.inflate(R.layout.fragment_graph__data, container, false);
+
     }
+
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState){
-
-        Log.v("here","isthisrun");
-
-        //view.findViewById(R.id.)
+        ((WalkthroughMasterActivity)getActivity()).setGUI(view);
+        //((WalkthroughMasterActivity)getActivity()).setGraph_data_flag(true);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -98,6 +97,7 @@ public class Graph_Data extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
+        ((WalkthroughMasterActivity)getActivity()).setGraph_data_flag(false);
         mListener = null;
     }
 
