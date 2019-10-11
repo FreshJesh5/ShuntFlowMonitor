@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import org.achartengine.GraphicalView;
 import java.util.ArrayList;
 import java.util.List;
@@ -120,7 +122,6 @@ public class WalkthroughMasterActivity extends BleProfileActivity
         */
     }
 
-
     @Override
     public void onBackPressed() {
         onDeviceDisconnected();
@@ -206,6 +207,25 @@ public class WalkthroughMasterActivity extends BleProfileActivity
 
     public void setGraph_data_flag(boolean b) { graph_data_flag = b; }
 
+    public void actuatorOn(boolean b) {
+        byte[] bleData = {0};
+        if (b) {
+            bleData[0] = 1;
+            manager.writeRXCharacteristic(bleData);
+            // Show the switch button checked status as toast message
+            //this.runOnUiThread(new Runnable() {
+            //    public void run() {
+            //    Toast.makeText(getApplicationContext(), "Heater on", Toast.LENGTH_SHORT).show();
+            //    }
+
+        } else {
+            // If the switch button is off
+            // Show the switch button checked status as toast message
+            bleData[0] = 0;
+            manager.writeRXCharacteristic(bleData);
+        }
+    }
+
     //added updateBattery function. This function takes the b array filled with advertised
     //battery life data and adds it to the mybattery TextView, which will display it. The
     //function only updates the View every 50 cycles to save computing work, and the conversion
@@ -278,6 +298,7 @@ public class WalkthroughMasterActivity extends BleProfileActivity
 
     @Override
     public void onDeviceReady() {
+        actuatorOn(true);
         startShowGraph();
     }
 

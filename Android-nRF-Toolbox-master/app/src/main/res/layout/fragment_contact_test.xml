@@ -124,7 +124,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:text="@string/action_connect"
+            android:text="Start Data"
             android:layout_margin="100dp"
             android:visibility="invisible"
             />

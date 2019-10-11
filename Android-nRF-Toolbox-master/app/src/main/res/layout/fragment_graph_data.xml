@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".nfc_ble_hybrid.NFC_BLE_HYBRID_Activity" >
+    tools:context=".WalkthroughMasterActivity.WalkthroughMasterActivity" >
 
 
     <include layout="@layout/toolbar"
@@ -47,21 +47,9 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:onClick="onConnectClicked"
-            android:text="@string/action_connect"
+            android:text="@string/action_disconnect"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true" />
-        <Switch
-            android:id="@+id/switch2"
-            android:layout_width="87dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="30dp"
-            android:layout_marginLeft="20dp"
-            android:layout_weight="1"
-            android:checked="true"
-            android:text="LOG"
-            android:textColor="@android:color/black" />
     </no.nordicsemi.android.nrftoolbox.widget.ForegroundRelativeLayout>
 </LinearLayout>
 

@@ -82,7 +82,10 @@ public class WalkthroughMaster_Manager extends BleManager<WalkthroughMaster_Mana
             final BluetoothGattService RXService = gatt.getService(RX_SERVICE_UUID);
             if (service != null) {
                 mHRCharacteristic = service.getCharacteristic(HR_CHARACTERISTIC_UUID);
+            }
+            if (RXService != null){
                 mRXCharacteristic = RXService.getCharacteristic(RX_CHAR_UUID);
+                Log.v("log", "RXService null");
             }
             return mHRCharacteristic != null && mRXCharacteristic != null;
         }
