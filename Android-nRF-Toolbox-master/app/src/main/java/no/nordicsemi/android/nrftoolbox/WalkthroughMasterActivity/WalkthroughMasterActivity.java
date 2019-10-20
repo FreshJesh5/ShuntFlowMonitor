@@ -1,10 +1,12 @@
 package no.nordicsemi.android.nrftoolbox.WalkthroughMasterActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -124,8 +126,25 @@ public class WalkthroughMasterActivity extends BleProfileActivity
 
     @Override
     public void onBackPressed() {
-        onDeviceDisconnected();
-        finish();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle("Abondon Setup");
+        builder.setMessage("Are you sure you want to return to menu? All setup progress would be lost.");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                WalkthroughMasterActivity.super.onBackPressed();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+            }
+        });
+        builder.show();
+
+        //disconnectDevice();
+        //onDeviceDisconnected();
+        //finish();
     }
 
     protected void onResume() {
