@@ -348,10 +348,13 @@ public class WalkthroughMasterActivity extends BleProfileActivity
         curra = a[0];
         datalog.appendLog(x,y,z,a,b);
 
+        updateGraph(x,y,z,a);
+        updateBattery(b[0]);
+        /* //For recording data only after contact test
         if(graph_data_flag == true) {
             updateGraph(x,y,z,a);
             updateBattery(b[0]);
-        }
+        }*/
 
     }
 

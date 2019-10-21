@@ -93,7 +93,7 @@ public class ContactTestFragment extends Fragment {
                 //move onto the next fragment(Contact Test) and reset all texts that are not immediately set
                 ((WalkthroughMasterActivity) getActivity()).setVpPager(3);
                 graph_data_button.setVisibility(View.INVISIBLE);
-                ((WalkthroughMasterActivity)getActivity()).setGraph_data_flag(true);
+                //((WalkthroughMasterActivity)getActivity()).setGraph_data_flag(true);
 
             }
         });
