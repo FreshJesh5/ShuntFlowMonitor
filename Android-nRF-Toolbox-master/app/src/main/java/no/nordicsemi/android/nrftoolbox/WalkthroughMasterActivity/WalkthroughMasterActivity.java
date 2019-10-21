@@ -1,10 +1,12 @@
 package no.nordicsemi.android.nrftoolbox.WalkthroughMasterActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -126,8 +128,25 @@ public class WalkthroughMasterActivity extends BleProfileActivity
 
     @Override
     public void onBackPressed() {
-        onDeviceDisconnected();
-        finish();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle("Abondon Setup");
+        builder.setMessage("Are you sure you want to return to menu? All setup progress would be lost.");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                WalkthroughMasterActivity.super.onBackPressed();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+            }
+        });
+        builder.show();
+
+        //disconnectDevice();
+        //onDeviceDisconnected();
+        //finish();
     }
 
     protected void onResume() {
@@ -245,12 +264,18 @@ public class WalkthroughMasterActivity extends BleProfileActivity
                 avg=0;
             else if(avg>100)
                 avg=100;
-            TextView battery = (TextView) findViewById(R.id.mybattery2);  //HERE
+            final TextView battery = (TextView) findViewById(R.id.mybattery2);  //HERE
             String percent = Double.toString(avg);
             int period = percent.indexOf(".");
             percent = percent.substring(0,period);
             percent+= "%";
-            battery.setText(percent);
+            final String mperc = percent;
+            battery.post(new Runnable() {
+                @Override
+                public void run() {
+                    battery.setText(mperc);
+                }
+            });
         }
     }
 
@@ -329,11 +354,14 @@ public class WalkthroughMasterActivity extends BleProfileActivity
         curra = a[0];
         datalog.appendLog(x,y,z,a,b);
 
-        if( myflag == true) {
-            updateGraph(x, y, z, a);
+        updateGraph(x,y,z,a);
+        updateBattery(b[0]);
+        /* //For recording data only after contact test
+        if(graph_data_flag == true) {
+            updateGraph(x,y,z,a);
             updateBattery(b[0]);
-        }
-        myflag = false;
+        }*/
+
     }
 
     @Override

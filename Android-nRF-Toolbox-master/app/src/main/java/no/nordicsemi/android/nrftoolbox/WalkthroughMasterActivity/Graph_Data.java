@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import no.nordicsemi.android.nrftoolbox.R;
 
@@ -72,6 +73,7 @@ public class Graph_Data extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState){
         ((WalkthroughMasterActivity)getActivity()).setGUI(view);
+        //((WalkthroughMasterActivity)getActivity()).findFragmentConnectButton((Button) getView().findViewById(R.id.finish_graph));
         //((WalkthroughMasterActivity)getActivity()).setGraph_data_flag(true);
     }
 

@@ -38,23 +38,29 @@ public class TimerFragment extends Fragment {
             Long elapSeconds = 0L;
             Long secondDisp = 0L;
             Long minuteDisp = 0L;
-            String Timer = null;
-            String sPercent = null;
+            String mTime = null;
             elapSeconds = millisUntilFinished/1000;
             secondDisp = elapSeconds % 60;
             minuteDisp = elapSeconds / 60;
 
             if (minuteDisp < 10L)
-                Timer = "0";
-            Timer += Long.toString(minuteDisp) + ":";
+                mTime = "0";
+            mTime += Long.toString(minuteDisp) + ":";
             if (secondDisp < 10L)
-                Timer += "0";
-            Timer += Long.toString(secondDisp);
+                mTime += "0";
+            mTime += Long.toString(secondDisp);
             mProgressBar.setProgress(120 - myInt);
             percent = 100 - Math.round(100*myInt/120);
-            sPercent = percent + "%";
-            clock.setText(Timer);
-            prog_percent.setText(sPercent);
+            final String sPercent = percent + "%";
+            final String mClock = mTime;
+                    clock.post(new Runnable() {
+                @Override
+                public void run() {
+                    clock.setText(mClock);
+                    prog_percent.setText(sPercent);
+                }
+            });
+
         }
         //Tells the system what to do once the timer is finished
         public void onFinish() {

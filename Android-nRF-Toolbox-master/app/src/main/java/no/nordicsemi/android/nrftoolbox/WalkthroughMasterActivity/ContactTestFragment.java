@@ -90,32 +90,40 @@ public class ContactTestFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view,savedInstanceState);
-        ((WalkthroughMasterActivity)getActivity()).findFragmentConnectButton((Button) getView().findViewById(R.id.whywontyouwork));
-        graph_data_button = getView().findViewById(R.id.move_on_from_contact_button);
+        ((WalkthroughMasterActivity)getActivity()).findFragmentConnectButton((Button) view.findViewById(R.id.whywontyouwork));
+        graph_data_button = view.findViewById(R.id.move_on_from_contact_button);
         graph_data_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //move onto the next fragment(Contact Test) and reset all texts that are not immediately set
                 ((WalkthroughMasterActivity) getActivity()).setVpPager(3);
                 graph_data_button.setVisibility(View.INVISIBLE);
-               // ((WalkthroughMasterActivity)getActivity()).setGraph_data_flag(true);              // Use this in the future if we do not want to graph Contact Test Data
+                //((WalkthroughMasterActivity)getActivity()).setGraph_data_flag(true);
 
             }
         });
+
         mProgressBar2 = (ProgressBar) view.findViewById(R.id.timerProgressBar2);
         prog_percent2 = view.findViewById(R.id.prog_percent2);
-         mview = getView().findViewById(R.id.mygreenval);
-         mview2 = getView().findViewById(R.id.myyellowval);
-        // mview.setText("0.0");   //bottom value in table
-        // mview2.setText("0.0");  //top value in table
-        //HERE
+         mview = view.findViewById(R.id.mygreenval);
+         mview2 = view.findViewById(R.id.myyellowval);
     }
 
     public void storeFirstAdValues(int[] x,int[] y, int[] z, int[] a) {
         //assign firstGreenVal and firstYellowVal the first advertised values ***DEPENDS ON UPSTREAM/DOWNSTREAM
         firstGreenVal = x[1];
         firstYellowVal = z[1];
-        mview.setText("0.0");
-        mview2.setText("0.0");
+        mview.post(new Runnable() {
+            @Override
+            public void run() {
+                mview.setText("0.0");
+            }
+        });
+        mview2.post(new Runnable() {
+            @Override
+            public void run() {
+                mview2.setText("0.0");
+            }
+        });
     }
 
     public void doContactTest(Boolean yellow_upstream_flag) {
@@ -162,6 +170,7 @@ public class ContactTestFragment extends Fragment {
         //TextView mview = getView().findViewById(R.id.no_fail);
         //mview.setText("Error:"+mstring);
         Toast.makeText(getActivity().getApplicationContext(),"Error:"+mstring, Toast.LENGTH_LONG).show();
+        mProgressBar2.setProgress(0);
         //Handler handler = new Handler();
         ((WalkthroughMasterActivity)getActivity()).disconnectDevice();
         //handler.postDelayed(new Runnable() {
@@ -199,22 +208,27 @@ public class ContactTestFragment extends Fragment {
                 lastGreenVal = myact.currx;
                 lastYellowVal = myact.currz;
                 Boolean upflag = myact.getYellow_upstream_flag();
-                TextView mview = getView().findViewById(R.id.my_sec_greenval);
-                mview.setText(String.format("%d", lastGreenVal));   //bottom value in table
-                mview = getView().findViewById(R.id.my_sec_yellow_val);
-                mview.setText(String.format("%d", lastYellowVal));  //top value in table
+                final Double greendec = .0035*(lastGreenVal-firstGreenVal);
+                final Double yellowdec = .0035*(lastYellowVal-firstYellowVal);
+                mview = getView().findViewById(R.id.my_sec_greenval);
+                mview.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mview.setText("" + greendec);   //bottom value in table
+                    }
+                });
+                mview2 = getView().findViewById(R.id.my_sec_yellow_val);
+                mview2.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mview2.setText("" + yellowdec);  //top value in table
+                    }
+                });
             doContactTest(upflag);
             //}
         }
 
     };
-    /*
-    Double k = .0035*Math.abs(lastGreenVal - firstGreenVal);
-                mview.setText(String.format("%d",k ));   //bottom value in table
-                mview = getView().findViewById(R.id.my_sec_yellow_val);
-                k = .0035*Math.abs(lastYellowVal - firstYellowVal);
-                mview.setText(String.format("%d", k));  //top value in table
-     */
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -240,7 +254,7 @@ public class ContactTestFragment extends Fragment {
         //Fixes bug where timer still exists after back button is pressed, causing the app to crash
         ((WalkthroughMasterActivity)getActivity()).disconnectDevice();
         //((WalkthroughMasterActivity)getActivity()).onDeviceDisconnected();
-        myTimer.cancel();
+        //myTimer.cancel();
         super.onDetach();
         mListener = null;
     }
