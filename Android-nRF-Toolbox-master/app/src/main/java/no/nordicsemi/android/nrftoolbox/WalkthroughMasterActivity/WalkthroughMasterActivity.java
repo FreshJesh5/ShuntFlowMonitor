@@ -48,13 +48,15 @@ public class WalkthroughMasterActivity extends BleProfileActivity
     private int batcount = 0;
 
     private boolean first_val_flag = true;
+    private boolean myflag = true;
     private boolean yellow_upstream_flag = false;
     public void setYellow_upstream_flag(boolean mBool) {
         yellow_upstream_flag = mBool;
     }
     public boolean getYellow_upstream_flag() {return yellow_upstream_flag;}
 
-    private boolean graph_data_flag = false;
+    private boolean graph_data_flag = false;                                           // for use with changing where graph data begins
+    //public void setGraph_data_flag(boolean b) { graph_data_flag = b;}
     public int currx;
     public int curry;
     public int currz;
@@ -205,8 +207,6 @@ public class WalkthroughMasterActivity extends BleProfileActivity
         }
     }
 
-    public void setGraph_data_flag(boolean b) { graph_data_flag = b; }
-
     public void actuatorOn(boolean b) {
         byte[] bleData = {0};
         if (b) {
@@ -319,8 +319,8 @@ public class WalkthroughMasterActivity extends BleProfileActivity
             first_val_flag = false;
             //store the first values advertised
             ContactTestFragment mFrag =  (ContactTestFragment) pagerAdapter.getItem(2);
-            mFrag.myTimer.start();
             mFrag.storeFirstAdValues(x,y,z,a);
+            mFrag.myTimer.start();
         }
         //store values as global variables so they can be accessed by contact test fragment methods
         currx = x[0];//TO DO: CHANGE TO PRIVATE AND MAKE A GETTER METHOD
@@ -329,11 +329,11 @@ public class WalkthroughMasterActivity extends BleProfileActivity
         curra = a[0];
         datalog.appendLog(x,y,z,a,b);
 
-        if(graph_data_flag == true) {
-            updateGraph(x,y,z,a);
+        if( myflag == true) {
+            updateGraph(x, y, z, a);
             updateBattery(b[0]);
         }
-
+        myflag = false;
     }
 
     @Override

@@ -36,10 +36,34 @@
             android:layout_margin="20dp"
             />
 
+        <ProgressBar
+            android:id="@+id/timerProgressBar2"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="150dp"
+            android:progressDrawable="@drawable/circular_progress_bar"
+            android:background="@drawable/circular_shape"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:max="120"
+            android:indeterminate="false"
+            android:min="0"
+            android:progress="0" />
+        <TextView
+            android:id="@+id/prog_percent2"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="215dp"
+            android:gravity="center"
+            android:text="0%"
+            />
         <TableLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
+            android:layout_below="@id/timerProgressBar2"
             android:layout_centerHorizontal="true">
             <TableRow
                 android:background="@android:color/holo_blue_dark">
@@ -64,59 +88,45 @@
                 android:background="@color/darkGray"
                 android:backgroundTintMode="screen">
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Green Values"
                     android:gravity="center"/>
                 <TextView
                     android:id="@+id/mygreenval"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="no"
+                    android:text="n/a"
                     android:gravity="center"/>
                 <TextView
                     android:id="@+id/my_sec_greenval"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="no"
-                    android:layout_gravity="center"/>
+                    android:text="n/a"
+                    android:gravity="center"/>
             </TableRow>
             <TableRow
                 android:background="@android:color/background_light">
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Yellow Values"
                     android:gravity="center"/>
                 <TextView
                     android:id="@+id/myyellowval"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toLeftOf="@id/instruction_spinner_one"
-                    android:text="no"
-                    android:layout_centerVertical="true"
+                    android:text="n/a"
                     android:gravity="center"/>
                 <TextView
                     android:id="@+id/my_sec_yellow_val"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="no"
-                    android:layout_gravity="center"/>
+                    android:text="n/a"
+                    android:gravity="center"/>
 
             </TableRow>
         </TableLayout>
-
-        <TextView
-            android:id="@+id/no_fail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:layout_gravity="center"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="200dp"
-            />
-
 
         <Button
             android:id="@+id/move_on_from_contact_button"
@@ -124,8 +134,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:text="Start Data"
-            android:layout_margin="100dp"
+            android:text="Start Measurement Process"
+            android:layout_margin="70dp"
             android:visibility="invisible"
             />
     </no.nordicsemi.android.nrftoolbox.widget.ForegroundRelativeLayout>

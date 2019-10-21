@@ -96,7 +96,7 @@ public class Graph_Data extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        ((WalkthroughMasterActivity)getActivity()).setGraph_data_flag(false);
+        //((WalkthroughMasterActivity)getActivity()).setGraph_data_flag(false);
         mListener = null;
     }
 

@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,7 +41,11 @@ public class ContactTestFragment extends Fragment {
     public int lastYellowVal;
     public int lastGreenVal;
     private View graph_data_button;
-
+    private ProgressBar mProgressBar2;
+    private TextView prog_percent2;
+    private int percent2;
+    private TextView mview;
+    private TextView mview2;
     private OnFragmentInteractionListener mListener;
 
     public ContactTestFragment() {
@@ -78,7 +83,6 @@ public class ContactTestFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
         return inflater.inflate(R.layout.fragment_contact_test, container, false);
     }
 
@@ -93,20 +97,25 @@ public class ContactTestFragment extends Fragment {
                 //move onto the next fragment(Contact Test) and reset all texts that are not immediately set
                 ((WalkthroughMasterActivity) getActivity()).setVpPager(3);
                 graph_data_button.setVisibility(View.INVISIBLE);
-                ((WalkthroughMasterActivity)getActivity()).setGraph_data_flag(true);
+               // ((WalkthroughMasterActivity)getActivity()).setGraph_data_flag(true);              // Use this in the future if we do not want to graph Contact Test Data
 
             }
         });
+        mProgressBar2 = (ProgressBar) view.findViewById(R.id.timerProgressBar2);
+        prog_percent2 = view.findViewById(R.id.prog_percent2);
+         mview = getView().findViewById(R.id.mygreenval);
+         mview2 = getView().findViewById(R.id.myyellowval);
+        // mview.setText("0.0");   //bottom value in table
+        // mview2.setText("0.0");  //top value in table
+        //HERE
     }
 
     public void storeFirstAdValues(int[] x,int[] y, int[] z, int[] a) {
         //assign firstGreenVal and firstYellowVal the first advertised values ***DEPENDS ON UPSTREAM/DOWNSTREAM
         firstGreenVal = x[1];
         firstYellowVal = z[1];
-        TextView mview = getView().findViewById(R.id.mygreenval);
-        mview.setText("" + firstGreenVal);   //bottom value in table
-        mview = getView().findViewById(R.id.myyellowval);
-        mview.setText("" + firstYellowVal);  //top value in table
+        mview.setText("0.0");
+        mview2.setText("0.0");
     }
 
     public void doContactTest(Boolean yellow_upstream_flag) {
@@ -164,14 +173,23 @@ public class ContactTestFragment extends Fragment {
 
     }
 
-    public CountDownTimer myTimer = new CountDownTimer(5000,1000) {//cDI is 120000
+    public CountDownTimer myTimer = new CountDownTimer(10000,1000) {//cDI is 120000
 
         private TextView tv;
          int[] adv_vals = new int[4];
 
+         public void onStart() {
+
+         }
         //Creates the display used by the clock and updates it along with the progress bar every second
         public void onTick(long millisUntilFinished) {
-
+            //  sets the progress bar progress to millisUntilFinished/1000
+                int myInt = (int) millisUntilFinished/1000;
+                String sPercent2 = null;
+                mProgressBar2.setProgress(120 - myInt);
+                percent2 = 100 - Math.round(100*myInt/120);
+                sPercent2 = String.format("%d%%", percent2);
+                prog_percent2.setText(sPercent2);
         }
         //Tells the system what to do once the timer is finished
         public void onFinish() {
@@ -182,13 +200,21 @@ public class ContactTestFragment extends Fragment {
                 lastYellowVal = myact.currz;
                 Boolean upflag = myact.getYellow_upstream_flag();
                 TextView mview = getView().findViewById(R.id.my_sec_greenval);
-                mview.setText("" + lastGreenVal);   //bottom value in table
+                mview.setText(String.format("%d", lastGreenVal));   //bottom value in table
                 mview = getView().findViewById(R.id.my_sec_yellow_val);
-                mview.setText("" + lastYellowVal);  //top value in table
+                mview.setText(String.format("%d", lastYellowVal));  //top value in table
             doContactTest(upflag);
             //}
         }
+
     };
+    /*
+    Double k = .0035*Math.abs(lastGreenVal - firstGreenVal);
+                mview.setText(String.format("%d",k ));   //bottom value in table
+                mview = getView().findViewById(R.id.my_sec_yellow_val);
+                k = .0035*Math.abs(lastYellowVal - firstYellowVal);
+                mview.setText(String.format("%d", k));  //top value in table
+     */
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -234,3 +260,5 @@ public class ContactTestFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 }
+
+   
