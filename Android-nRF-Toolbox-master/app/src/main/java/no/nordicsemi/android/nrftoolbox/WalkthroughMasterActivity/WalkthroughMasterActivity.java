@@ -97,7 +97,7 @@ public class WalkthroughMasterActivity extends BleProfileActivity
     @Override
     protected void onCreateView(final Bundle savedInstanceState) {
         setContentView(R.layout.activity_walkthrough_master);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         //setGUI();
         setupViewPager();
         // Listener for Led/GPIO switch
