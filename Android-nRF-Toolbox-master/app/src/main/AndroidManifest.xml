@@ -22,8 +22,15 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
-        <activity android:name=".UploadDataActivity"></activity>
-        <activity android:name=".WalkthroughMasterActivity.WalkthroughMasterActivity" />
+
+        <activity
+            android:name=".UploadDataActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name=".WalkthroughMasterActivity.WalkthroughMasterActivity"
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name="com.dropbox.client2.android.AuthActivity"
             android:configChanges="orientation|keyboard"
@@ -40,17 +47,22 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".dfu.NotificationActivity"
             android:label="Rhaeos Monitor" />
+        
         <activity
             android:name=".nfc_ble_hybrid.NFC_BLE_HYBRID_Activity"
             android:icon="@drawable/johns_app_launcher"
-            android:label="Rhaeos Monitor" />
+            android:label="Rhaeos Monitor"
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".MainActivity"
             android:icon="@drawable/johns_app_launcher"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,11 +1,13 @@
 package no.nordicsemi.android.nrftoolbox.WalkthroughMasterActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -169,14 +171,26 @@ public class ContactTestFragment extends Fragment {
     public void onTestFailed(String mstring) {
         //TextView mview = getView().findViewById(R.id.no_fail);
         //mview.setText("Error:"+mstring);
-        Toast.makeText(getActivity().getApplicationContext(),"Error:"+mstring, Toast.LENGTH_LONG).show();
+        //Toast.makeText(getActivity(),"Error:"+mstring, Toast.LENGTH_LONG).show();
         mProgressBar2.setProgress(0);
         //Handler handler = new Handler();
-        ((WalkthroughMasterActivity)getActivity()).disconnectDevice();
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+        builder.setTitle("Contact Test Failed");
+        builder.setMessage("Downstream and Upstream orientation incorrect. Taking you back to main menu.");
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                ((WalkthroughMasterActivity)getActivity()).disconnectDevice();
+                ((WalkthroughMasterActivity)getActivity()).onDeviceDisconnected();
+                ((WalkthroughMasterActivity)getActivity()).finish();
+            }
+        });
+        builder.show();
+
         //handler.postDelayed(new Runnable() {
         //   public void run() {
                 //wait 2 seconds and go back to the beginning of the walkthrough to start over
-                ((WalkthroughMasterActivity) getActivity()).setVpPager(0);
+                //((WalkthroughMasterActivity) getActivity()).setVpPager(0);
         //    }
         //}, 5000);
 
