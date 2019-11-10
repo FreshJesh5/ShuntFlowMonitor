@@ -16,12 +16,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(false);  // uncomment to add back button and in styles.xml, change noactionbar to darkactionbar
     }
+    /*
     public boolean onOptionsItemSelected(MenuItem item){
         finish();
         return true;
     }
+    */
     public void beginHybridActivity(android.view.View view) {
         Intent intent = new Intent(MainActivity.this, NFC_BLE_HYBRID_Activity.class);
         startActivity(intent);
