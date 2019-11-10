@@ -33,6 +33,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Handler;
+import android.util.Log;
 
 import java.util.Queue;
 import java.util.UUID;
@@ -214,6 +215,7 @@ public abstract class BleManager<E extends BleManagerCallbacks> {
 			mCallbacks.onDeviceDisconnecting();
 			Logger.d(mLogSession, "gatt.disconnect()");
 			mBluetoothGatt.disconnect();
+			Log.v("BleManager", "Device disconnected");
 			return true;
 		}
 		return false;

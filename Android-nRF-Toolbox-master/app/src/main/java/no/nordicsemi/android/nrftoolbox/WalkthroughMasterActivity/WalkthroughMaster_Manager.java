@@ -83,10 +83,12 @@ public class WalkthroughMaster_Manager extends BleManager<WalkthroughMaster_Mana
             if (service != null) {
                 mHRCharacteristic = service.getCharacteristic(HR_CHARACTERISTIC_UUID);
             }
+            else {Log.v("log", "RXService null");}
             if (RXService != null){
                 mRXCharacteristic = RXService.getCharacteristic(RX_CHAR_UUID);
-                Log.v("log", "RXService null");
             }
+            else{Log.v("log", "RXService null");}
+
             return mHRCharacteristic != null && mRXCharacteristic != null;
         }
 

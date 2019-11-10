@@ -181,7 +181,6 @@ public class ContactTestFragment extends Fragment {
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 ((WalkthroughMasterActivity)getActivity()).disconnectDevice();
-                ((WalkthroughMasterActivity)getActivity()).onDeviceDisconnected();
                 ((WalkthroughMasterActivity)getActivity()).finish();
             }
         });

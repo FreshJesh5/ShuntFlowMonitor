@@ -51,7 +51,7 @@
         <activity
             android:name=".dfu.NotificationActivity"
             android:label="Rhaeos Monitor" />
-        
+
         <activity
             android:name=".nfc_ble_hybrid.NFC_BLE_HYBRID_Activity"
             android:icon="@drawable/johns_app_launcher"
