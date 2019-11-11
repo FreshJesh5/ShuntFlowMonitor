@@ -73,10 +73,12 @@ public class Graph_Data extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState){
         ((WalkthroughMasterActivity)getActivity()).setGUI(view);
-        //((WalkthroughMasterActivity)getActivity()).findFragmentConnectButton((Button) getView().findViewById(R.id.finish_graph));
-        //((WalkthroughMasterActivity)getActivity()).setGraph_data_flag(true);
     }
 
+    public void finishGraph(View view){
+        ((WalkthroughMasterActivity)getActivity()).disconnectDevice();
+        ((WalkthroughMasterActivity)getActivity()).finish();
+    }
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {

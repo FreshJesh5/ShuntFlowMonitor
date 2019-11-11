@@ -1,5 +1,6 @@
 package no.nordicsemi.android.nrftoolbox.WalkthroughMasterActivity;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.net.Uri;
@@ -402,6 +403,7 @@ public class WalkthroughMasterActivity extends BleProfileActivity
         pagerAdapter.addFragment(ContactTestFragment.newInstance("2","page #3"));
         pagerAdapter.addFragment(Graph_Data.newInstance("3","page #4"));
         vpPager.setAdapter(pagerAdapter);
+
     }
 
     //method used to move onto whatever desired fragment
@@ -433,4 +435,7 @@ public class WalkthroughMasterActivity extends BleProfileActivity
         //Leave Empty
     }
 
+    public void finishGraph(View view) {
+        ((Graph_Data)pagerAdapter.getItem(3)).finishGraph(view);
+    }
 }

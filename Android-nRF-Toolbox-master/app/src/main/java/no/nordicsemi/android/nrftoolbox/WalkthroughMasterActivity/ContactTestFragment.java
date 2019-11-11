@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -17,6 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import no.nordicsemi.android.nrftoolbox.R;
+
+import static java.lang.Math.abs;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -49,6 +52,7 @@ public class ContactTestFragment extends Fragment {
     private TextView mview;
     private TextView mview2;
     private OnFragmentInteractionListener mListener;
+    private Button connectButton;
 
     public ContactTestFragment() {
         // Required empty public constructor
@@ -92,11 +96,12 @@ public class ContactTestFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view,savedInstanceState);
-        ((WalkthroughMasterActivity)getActivity()).findFragmentConnectButton((Button) view.findViewById(R.id.whywontyouwork));
+        connectButton = view.findViewById(R.id.whywontyouwork);
+        ((WalkthroughMasterActivity)getActivity()).findFragmentConnectButton(connectButton);
         graph_data_button = view.findViewById(R.id.move_on_from_contact_button);
         graph_data_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //move onto the next fragment(Contact Test) and reset all texts that are not immediately set
+                //move onto the next fragment(Graph_Data) and reset all texts that are not immediately set
                 ((WalkthroughMasterActivity) getActivity()).setVpPager(3);
                 graph_data_button.setVisibility(View.INVISIBLE);
                 //((WalkthroughMasterActivity)getActivity()).setGraph_data_flag(true);
@@ -114,6 +119,12 @@ public class ContactTestFragment extends Fragment {
         //assign firstGreenVal and firstYellowVal the first advertised values ***DEPENDS ON UPSTREAM/DOWNSTREAM
         firstGreenVal = x[1];
         firstYellowVal = z[1];
+        connectButton.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                connectButton.setVisibility(View.INVISIBLE);
+            }
+        },200);        //Hide connect Button once the user connects
         mview.post(new Runnable() {
             @Override
             public void run() {
@@ -126,6 +137,7 @@ public class ContactTestFragment extends Fragment {
                 mview2.setText("0.0");
             }
         });
+
     }
 
     public void doContactTest(Boolean yellow_upstream_flag) {
@@ -133,21 +145,21 @@ public class ContactTestFragment extends Fragment {
         //first test to see if the downstream temperature is higher than the upstream temperature
         if (yellow_upstream_flag) {
             if (lastYellowVal > lastGreenVal || firstYellowVal > firstGreenVal) {
-                mstring = "Upstream Temp is higher than Downstream temp";
+                mstring = "Upstream temperature is higher than Downstream temperature.";
                 onTestFailed(mstring);
                 return;
             }
         }
         else {
             if (lastYellowVal < lastGreenVal || firstYellowVal < firstGreenVal) {
-                mstring = "Upstream Temp is higher than Downstream temp";
+                mstring = "Upstream temperature is higher than Downstream temperature.";
                 onTestFailed(mstring);
                 return;
             }
         }
         //second test if delta temperature for both sensors is less than 2 degrees
-        if (.0035*Math.abs(lastGreenVal - firstGreenVal) > 2 || .0035*Math.abs(lastYellowVal - firstYellowVal) > 2) {
-            mstring = "Delta Temperature is more than 2 degrees";
+        if (.0035* abs(lastGreenVal - firstGreenVal) > 2 || .0035* abs(lastYellowVal - firstYellowVal) > 2) {
+            mstring = "Rise in temperature is more than 2 degrees.";
             onTestFailed(mstring);
             return;
         }
@@ -169,15 +181,11 @@ public class ContactTestFragment extends Fragment {
 
     //Disconnect from the device here
     public void onTestFailed(String mstring) {
-        //TextView mview = getView().findViewById(R.id.no_fail);
-        //mview.setText("Error:"+mstring);
-        //Toast.makeText(getActivity(),"Error:"+mstring, Toast.LENGTH_LONG).show();
         mProgressBar2.setProgress(0);
-        //Handler handler = new Handler();
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         builder.setTitle("Contact Test Failed");
-        builder.setMessage("Downstream and Upstream orientation incorrect. Taking you back to main menu.");
+        builder.setMessage(mstring + " Taking you back to main menu.");
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 ((WalkthroughMasterActivity)getActivity()).disconnectDevice();
@@ -185,13 +193,6 @@ public class ContactTestFragment extends Fragment {
             }
         });
         builder.show();
-
-        //handler.postDelayed(new Runnable() {
-        //   public void run() {
-                //wait 2 seconds and go back to the beginning of the walkthrough to start over
-                //((WalkthroughMasterActivity) getActivity()).setVpPager(0);
-        //    }
-        //}, 5000);
 
     }
 
@@ -221,8 +222,8 @@ public class ContactTestFragment extends Fragment {
                 lastGreenVal = myact.currx;
                 lastYellowVal = myact.currz;
                 Boolean upflag = myact.getYellow_upstream_flag();
-                final Double greendec = .0035*(lastGreenVal-firstGreenVal);
-                final Double yellowdec = .0035*(lastYellowVal-firstYellowVal);
+                final Double greendec = .0035*abs(lastGreenVal-firstGreenVal);
+                final Double yellowdec = .0035*abs(lastYellowVal-firstYellowVal);
                 mview = getView().findViewById(R.id.my_sec_greenval);
                 mview.post(new Runnable() {
                     @Override
