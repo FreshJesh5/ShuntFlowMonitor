@@ -64,7 +64,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_toLeftOf="@id/instruction_spinner_one"
-                    android:text="Yellow"
+                    android:text="Red"
                     android:layout_centerVertical="true"
                     android:gravity="center"/>
 

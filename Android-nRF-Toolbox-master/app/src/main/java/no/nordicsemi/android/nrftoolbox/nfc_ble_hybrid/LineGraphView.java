@@ -139,8 +139,8 @@ public class LineGraphView {
 		renderer.setYLabelsPadding(30);
 
 		renderer.setLabelsTextSize(30);
-		renderer.setYAxisMax(10);
-		renderer.setYAxisMin(0);
+		renderer.setYAxisMax(3);
+		renderer.setYAxisMin(-3);
 		renderer.setXAxisMax(NFC_BLE_HYBRID_Activity.GRAPH_WINDOW);
 		renderer.setXAxisMin(0);
 		renderer.setXLabels(8);

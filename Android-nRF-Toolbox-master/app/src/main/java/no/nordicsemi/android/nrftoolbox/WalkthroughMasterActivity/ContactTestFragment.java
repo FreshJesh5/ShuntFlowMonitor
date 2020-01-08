@@ -128,15 +128,15 @@ public class ContactTestFragment extends Fragment {
         mview.post(new Runnable() {
             @Override
             public void run() {
-                mview.setText("0.0");
+                mview.setText("ok");
             }
         });
         mview2.post(new Runnable() {
             @Override
             public void run() {
-                mview2.setText("0.0");
+                mview2.setText("ok");
             }
-        });
+        });//sets the text from waiting to ok so user knows the value is received
 
     }
 
@@ -219,23 +219,24 @@ public class ContactTestFragment extends Fragment {
             //public void storeLastAdValues(int[] x,int[] y, int[] z, int[] a) {
                 //assign firstGreenVal and firstYellowVal the first advertised values ***DEPENDS ON UPSTREAM/DOWNSTREAM
             WalkthroughMasterActivity myact = ((WalkthroughMasterActivity)getActivity());
-                lastGreenVal = myact.currx;
-                lastYellowVal = myact.currz;
+                //these values were used when we wanted to have the adc values shown in the contact test table
+                //lastGreenVal = myact.currx;
+                //lastYellowVal = myact.currz;
                 Boolean upflag = myact.getYellow_upstream_flag();
-                final Double greendec = .0035*abs(lastGreenVal-firstGreenVal);
-                final Double yellowdec = .0035*abs(lastYellowVal-firstYellowVal);
+                //final Double greendec = .0035*abs(lastGreenVal-firstGreenVal);
+                //final Double yellowdec = .0035*abs(lastYellowVal-firstYellowVal);
                 mview = getView().findViewById(R.id.my_sec_greenval);
                 mview.post(new Runnable() {
                     @Override
                     public void run() {
-                        mview.setText("" + greendec);   //bottom value in table
+                        mview.setText("ok");   //bottom value in table
                     }
                 });
                 mview2 = getView().findViewById(R.id.my_sec_yellow_val);
                 mview2.post(new Runnable() {
                     @Override
                     public void run() {
-                        mview2.setText("" + yellowdec);  //top value in table
+                        mview2.setText("ok");  //top value in table
                     }
                 });
             doContactTest(upflag);
