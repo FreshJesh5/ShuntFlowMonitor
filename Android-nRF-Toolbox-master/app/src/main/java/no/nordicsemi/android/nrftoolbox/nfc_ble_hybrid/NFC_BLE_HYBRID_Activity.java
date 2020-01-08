@@ -188,10 +188,10 @@ public class NFC_BLE_HYBRID_Activity extends BleProfileActivity implements NFC_B
 
 		for(int i = 0; i < 2; i++) {
 			mCounter++;
-			mLineGraph.addValue_x(mCounter, .0035*x[i]);
-			mLineGraph.addValue_y(mCounter, .0035*y[i]);
-			mLineGraph.addValue_z(mCounter, .0035*z[i]);
-			mLineGraph.addValue_a(mCounter, .0035*a[i]);
+			mLineGraph.addValue_x(mCounter, x[i]);
+			mLineGraph.addValue_y(mCounter, y[i]);
+			mLineGraph.addValue_z(mCounter, z[i]);
+			mLineGraph.addValue_a(mCounter, a[i]);
 			if (mCounter > GRAPH_WINDOW) {
 				mLineGraph.removeold(0);
 

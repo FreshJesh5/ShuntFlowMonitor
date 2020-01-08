@@ -78,10 +78,10 @@ public class log {
 
 
             for(int i = 0; i < 2; i++){
-                flow1 = .0035*(x[i]);
-                flow2 = .0035*(y[i]);
-                flow3 = .0035*(z[i]);
-                flow4 = .0035*(a[i]);
+                flow1 = (x[i]);
+                flow2 = (y[i]);
+                flow3 = (z[i]);
+                flow4 = (a[i]);
                 batteryval = b[i];
                // v_sup = vdd[i];
 

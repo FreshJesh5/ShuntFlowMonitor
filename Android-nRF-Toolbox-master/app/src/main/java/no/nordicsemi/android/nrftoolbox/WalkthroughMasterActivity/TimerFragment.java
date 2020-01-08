@@ -29,7 +29,7 @@ public class TimerFragment extends Fragment {
     private TextView clock;
     private TextView prog_percent;
     private TextView stableText;
-    CountDownTimer myTimer = new CountDownTimer(120000,1000) {//cDI is 120000
+    CountDownTimer myTimer = new CountDownTimer(1000,1000) {//cDI is 120000
 
         //Creates the display used by the clock and updates it along with the progress bar every second
         public void onTick(long millisUntilFinished) {

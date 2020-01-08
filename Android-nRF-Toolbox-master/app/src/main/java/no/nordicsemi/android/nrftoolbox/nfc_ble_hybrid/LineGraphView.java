@@ -53,14 +53,14 @@ public class LineGraphView {
 	private XYMultipleSeriesRenderer mMultiRenderer = new XYMultipleSeriesRenderer();
 	private LineGraphView mInstance = null;
 
-	private double x_init;
-	public double getx_init(){return x_init;}
-	private double y_init;
-	public double gety_init(){return y_init;}
-	private double z_init;
-	public double getz_init(){return z_init;}
-	private double a_init;
-	public double geta_init(){return a_init;}
+	private int x_init;
+	public int getx_init(){return x_init;}
+	private int y_init;
+	public int gety_init(){return y_init;}
+	private int z_init;
+	public int getz_init(){return z_init;}
+	private int a_init;
+	public int geta_init(){return a_init;}
 	/**
 	 * singleton implementation of LineGraphView class
 	 */
@@ -215,7 +215,7 @@ public class LineGraphView {
 
 
 
-	public void addValue_x(int x, double y) {
+	public void addValue_x(int x, int y) {
 		if (axisxSeries.getItemCount()==0) {
 			x_init = y;
 			axisxSeries.add(x, 0);
@@ -223,7 +223,7 @@ public class LineGraphView {
 		else axisxSeries.add(x, y-x_init);
 	}
 
-	public void addValue_y(int x, double y) {
+	public void addValue_y(int x, int y) {
 		if (axisySeries.getItemCount()==0) {
 			y_init = y;
 			axisySeries.add(x, 0);
@@ -231,7 +231,7 @@ public class LineGraphView {
 		else axisySeries.add(x, y-y_init);
 	}
 
-	public void addValue_z(int x, double y) {
+	public void addValue_z(int x, int y) {
 		if (axiszSeries.getItemCount()==0) {
 			z_init = y;
 			axiszSeries.add(x, 0);
@@ -239,7 +239,7 @@ public class LineGraphView {
 		else axiszSeries.add(x, y-z_init);
 	}
 
-	public void addValue_a(int x, double y) {
+	public void addValue_a(int x, int y) {
 		if (axisaSeries.getItemCount()==0) {
 			a_init = y;
 			axisaSeries.add(x, 0);

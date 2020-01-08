@@ -22,7 +22,7 @@ import no.nordicsemi.android.nrftoolbox.nfc_ble_hybrid.LineGraphView;
 
 public class UploadDataActivity extends AppCompatActivity {
 
-    private double x, y, z, a, time;
+    private int x, y, z, a, time;
     private int count;
     private LineGraphView mLineGraph = new LineGraphView();
     private GraphicalView mGraphView;
@@ -99,10 +99,15 @@ public class UploadDataActivity extends AppCompatActivity {
         }
         while ((line = reader.readLine()) != null) {
             mValues = line.split("\t");
-            x = Double.parseDouble(mValues[2]);
-            y = Double.parseDouble(mValues[3]);
-            z = Double.parseDouble(mValues[4]);
-            a = Double.parseDouble(mValues[5]);
+            //x = Double.parseDouble(mValues[2]);
+            //y = Double.parseDouble(mValues[3]);
+            //z = Double.parseDouble(mValues[4]);
+            //a = Double.parseDouble(mValues[5]);
+            x = Integer.parseInt(mValues[2]);
+            y = Integer.parseInt(mValues[3]);
+            z = Integer.parseInt(mValues[4]);
+            a = Integer.parseInt(mValues[5]);
+
             //Take these values and update the graph similarly to in NFC_BLE_HYBRID_Activity
            updateGraph();
                //If any of the parse functions do not work, the file is not in the correct format,
